@@ -111,6 +111,19 @@ export const ChatAssistant = () => {
           <p className="text-muted-foreground text-lg">
             Powered by a RAG backend with deep knowledge of HorizonVista's packages, policies, and destinations.
           </p>
+
+          <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-card border border-border/60 shadow-soft px-2 py-2">
+            <span className="text-xs text-muted-foreground px-3">Prefer messaging apps?</span>
+            <a
+              href={SOCIAL.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full gradient-blue text-primary-foreground text-sm font-semibold px-4 py-2 shadow-soft hover:shadow-glow transition-smooth"
+            >
+              <Send className="h-4 w-4" />
+              Chat on Telegram
+            </a>
+          </div>
         </div>
 
         <div className="max-w-3xl mx-auto rounded-3xl bg-card shadow-elegant border border-border/50 overflow-hidden">
@@ -122,13 +135,23 @@ export const ChatAssistant = () => {
               </div>
               <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-success border-2 border-card" />
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <p className="font-semibold text-sm">HorizonVista Agent</p>
               <p className="text-xs text-muted-foreground flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
                 Online — usually replies instantly
               </p>
             </div>
+            <a
+              href={SOCIAL.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open in Telegram"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground text-xs font-semibold px-3 py-1.5 transition-smooth"
+            >
+              <Send className="h-3.5 w-3.5" />
+              Telegram
+            </a>
           </div>
 
           {/* Messages */}
