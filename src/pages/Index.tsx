@@ -5,6 +5,7 @@ import { Packages } from "@/components/Packages";
 import { Services } from "@/components/Services";
 import { BookingForm } from "@/components/BookingForm";
 import { Analytics } from "@/components/Analytics";
+import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
       <Services />
       <BookingForm />
       <Analytics />
+      <Contact />
       <Footer />
     </main>
   );
