@@ -69,9 +69,16 @@ export const ChatAssistant = () => {
         body: { message, sessionId: getSessionId() },
       });
       if (error) throw error;
+      const d = (data ?? {}) as Record<string, unknown>;
+      const pick = (v: unknown) =>
+        typeof v === "string" && v.trim().length > 0 ? v : null;
       const reply =
-        (data as { reply?: string } | null)?.reply ??
-        "Sorry, I couldn't reach the travel agent right now.";
+        pick(d.output) ??
+        pick(d.reply) ??
+        pick(d.answer) ??
+        pick(d.response) ??
+        pick(d.message) ??
+        "No response received.";
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
     } catch (err) {
       console.error(err);
