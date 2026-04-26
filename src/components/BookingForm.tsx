@@ -23,6 +23,7 @@ type FormState = {
   travelDates: string;
   travelers: string;
   budget: string;
+  contactTime: string;
   message: string;
 };
 
@@ -34,6 +35,7 @@ const empty: FormState = {
   travelDates: "",
   travelers: "2",
   budget: "",
+  contactTime: "",
   message: "",
 };
 
@@ -100,7 +102,12 @@ export const BookingForm = () => {
                 <Input value={form.budget} onChange={update("budget")} placeholder="e.g. $3,000 per person" />
               </Field>
               <Field label="Preferred contact time (optional)">
-                <Input placeholder="e.g. evenings" onChange={() => {}} value="" disabled />
+                <Input
+                  type="text"
+                  value={form.contactTime}
+                  onChange={update("contactTime")}
+                  placeholder="e.g. Morning, afternoon, evening"
+                />
               </Field>
               <Field label="Message" className="md:col-span-2">
                 <textarea

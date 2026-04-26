@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Send, Sparkles, Loader2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
@@ -196,7 +198,28 @@ const MessageBubble = ({ msg }: { msg: ChatMessage }) => {
             : "bg-card text-card-foreground border border-border/60 rounded-bl-sm"
         )}
       >
-        {msg.content}
+        {isUser ? (
+          <p className="whitespace-pre-wrap">{msg.content}</p>
+        ) : (
+          <div
+            className={cn(
+              "prose prose-sm max-w-none",
+              "prose-p:my-1.5 prose-p:leading-relaxed",
+              "prose-strong:text-foreground prose-strong:font-semibold",
+              "prose-ul:my-2 prose-ul:pl-5 prose-ol:my-2 prose-ol:pl-5",
+              "prose-li:my-0.5 prose-li:marker:text-primary",
+              "prose-headings:font-semibold prose-headings:text-foreground prose-headings:mt-2 prose-headings:mb-1",
+              "prose-h1:text-base prose-h2:text-base prose-h3:text-sm",
+              "prose-a:text-primary prose-a:underline-offset-2 hover:prose-a:underline",
+              "prose-code:bg-secondary prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-code:before:content-none prose-code:after:content-none",
+              "prose-hr:my-3"
+            )}
+          >
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {msg.content}
+            </ReactMarkdown>
+          </div>
+        )}
       </div>
     </div>
   );
