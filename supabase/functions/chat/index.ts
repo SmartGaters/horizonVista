@@ -1,11 +1,13 @@
 // HorizonVista AI chat proxy
-// Receives { message, sessionId } from frontend, proxies to n8n webhook,
-// returns { reply: string }
+// Receives { message, sessionId } from frontend, proxies to the n8n webhook,
+// and returns the AI answer.
 import { corsHeaders } from "https://esm.sh/@supabase/supabase-js@2.95.0/cors";
 
-// TODO: Replace with the real n8n webhook URL once available.
 const N8N_WEBHOOK_URL =
-  Deno.env.get("N8N_CHAT_WEBHOOK_URL") ?? "https://example.com/webhook/travel-agent";
+  "https://n8n.hamzasallam.online/webhook/horizonvista/api/send-message";
+
+const N8N_AUTH_HEADER =
+  "Basic YWNjZXNzX3Rva2VuOmNtcGU0MTJob3Jpem9uVmlzdGE=";
 
 interface ChatRequestBody {
   message?: unknown;
@@ -39,64 +41,58 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    let reply = "";
+    const upstream = await fetch(N8N_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        Authorization: N8N_AUTH_HEADER,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message, sessionId }),
+    });
 
+    const rawText = await upstream.text();
+
+    if (!upstream.ok) {
+      console.error("n8n webhook failed", upstream.status, rawText);
+      return new Response(
+        JSON.stringify({
+          error: `n8n webhook returned ${upstream.status}`,
+          details: rawText.slice(0, 500),
+        }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // n8n typically returns JSON; fall back to raw text if not.
+    let parsed: Record<string, unknown> | null = null;
     try {
-      const upstream = await fetch(N8N_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, sessionId }),
-      });
-
-      if (upstream.ok) {
-        const text = await upstream.text();
-        try {
-          const data = JSON.parse(text);
-          reply = data.reply ?? data.output ?? data.text ?? "";
-        } catch {
-          reply = text;
-        }
-      } else {
-        console.warn("n8n webhook returned", upstream.status);
-      }
-    } catch (err) {
-      console.warn("n8n webhook unreachable:", err);
+      parsed = rawText ? (JSON.parse(rawText) as Record<string, unknown>) : null;
+    } catch {
+      parsed = null;
     }
 
-    // Fallback demo response so the UI works even before the webhook is wired up.
-    if (!reply) {
-      reply = buildDemoReply(message);
-    }
+    const pickString = (v: unknown): string | null =>
+      typeof v === "string" && v.trim().length > 0 ? v : null;
 
-    return new Response(JSON.stringify({ reply, sessionId }), {
+    const output =
+      pickString(parsed?.output) ??
+      pickString(parsed?.reply) ??
+      pickString(parsed?.answer) ??
+      pickString(parsed?.response) ??
+      pickString(parsed?.message) ??
+      pickString(rawText) ??
+      "No response received.";
+
+    return new Response(JSON.stringify({ output, sessionId }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
     console.error("chat function error:", err);
-    return new Response(JSON.stringify({ error: "Internal error" }), {
+    const msg = err instanceof Error ? err.message : "Internal error";
+    return new Response(JSON.stringify({ error: msg }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 });
-
-function buildDemoReply(message: string): string {
-  const lower = message.toLowerCase();
-  if (lower.includes("honeymoon") || lower.includes("maldives")) {
-    return "✨ Our Magical Maldives Escape (7 days, from $2800) is our top honeymoon pick — overwater villas, private dinners, and seaplane transfers included. Want me to draft a quote for two travelers?";
-  }
-  if (lower.includes("cappadocia")) {
-    return "🎈 Cappadocia Cave & Balloon Experience (4 days) features a sunrise balloon ride, cave hotel stay, and Goreme Open-Air Museum. Best months: April–June, Sep–Oct.";
-  }
-  if (lower.includes("cancellation") || lower.includes("policy")) {
-    return "Our standard policy: free cancellation up to 30 days before departure, 50% refund 15–29 days out, non-refundable within 14 days. Premium packages have flexible alternatives.";
-  }
-  if (lower.includes("price") || lower.includes("calculate") || lower.includes("travelers")) {
-    return "For 4 travelers, most packages apply a 10% group discount. Tell me which package and travel month and I'll generate a detailed quote.";
-  }
-  if (lower.includes("airport") || lower.includes("transfer")) {
-    return "Yes — private airport transfers are included on all premium packages and available as a $40/person add-on for standard packages.";
-  }
-  return "Thanks for your question! Once the n8n RAG backend is connected, I'll answer using HorizonVista's full knowledge base. (This is a demo response.)";
-}
