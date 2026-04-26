@@ -1,12 +1,14 @@
-import { Compass, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo-horizonvista-mark.jpg";
 
 const LINKS = [
   { href: "#chat", label: "AI Assistant" },
   { href: "#packages", label: "Packages" },
   { href: "#services", label: "Services" },
   { href: "#analytics", label: "Insights" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export const Navbar = () => {
@@ -16,10 +18,12 @@ export const Navbar = () => {
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/40">
       <div className="container flex items-center justify-between h-16">
         <a href="#" className="flex items-center gap-2.5">
-          <div className="h-9 w-9 rounded-xl gradient-blue flex items-center justify-center shadow-soft">
-            <Compass className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <span className="font-display font-bold text-lg">HorizonVista</span>
+          <img
+            src={logo}
+            alt="HorizonVista Travel logo"
+            className="h-10 w-10 rounded-full object-cover shadow-soft"
+          />
+          <span className="font-display font-bold text-lg hidden sm:inline">HorizonVista</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-7">
