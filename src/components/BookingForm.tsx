@@ -34,6 +34,7 @@ const empty: FormState = {
   travelDates: "",
   travelers: "2",
   budget: "",
+  contactTime: "",
   message: "",
 };
 
