@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
+import { SOCIAL } from "@/lib/contact";
 
 interface ChatMessage {
   role: "user" | "assistant";
