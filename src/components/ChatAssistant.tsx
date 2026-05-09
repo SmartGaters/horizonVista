@@ -3,7 +3,6 @@ import { Send, Sparkles, Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 import { SOCIAL } from "@/lib/contact";
 
@@ -11,6 +10,8 @@ interface ChatMessage {
   role: "user" | "assistant";
   content: string;
 }
+
+const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || "/api/chat";
 
 const EXAMPLE_PROMPTS = [
   "Recommend a honeymoon package",
@@ -68,11 +69,18 @@ export const ChatAssistant = () => {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("chat", {
-        body: { message, sessionId: getSessionId() },
+      const res = await fetch(CHAT_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, sessionId: getSessionId() }),
       });
-      if (error) throw error;
-      const d = (data ?? {}) as Record<string, unknown>;
+
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        throw new Error(errBody.error || `Server returned ${res.status}`);
+      }
+
+      const d = await res.json();
       const pick = (v: unknown) =>
         typeof v === "string" && v.trim().length > 0 ? v : null;
       const reply =
