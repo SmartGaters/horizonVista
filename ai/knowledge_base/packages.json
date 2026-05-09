@@ -1,0 +1,1366 @@
+[
+  {
+    "id": "PKG-001",
+    "name": "Magical Maldives Escape",
+    "destination": "Maldives",
+    "region": "Asia",
+    "duration_nights": 6,
+    "duration_days": 7,
+    "type": "Honeymoon / Romantic",
+    "highlights": [
+      "Overwater bungalow stay",
+      "Snorkeling & diving",
+      "Sunset cruise",
+      "Couples spa treatment",
+      "All-inclusive meals"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Malé, speedboat transfer to resort, welcome dinner",
+      "Day 2: Guided snorkeling tour, afternoon leisure on private beach",
+      "Day 3: Scuba diving introduction (certified instructor), sunset cruise",
+      "Day 4: Dolphin watching excursion, spa afternoon",
+      "Day 5: Island hopping tour, local village visit",
+      "Day 6: Water sports (kayaking, jet ski), farewell gala dinner",
+      "Day 7: Checkout, transfer to Malé airport"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "luxury",
+      "gsheet_ref": "PKG-001",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights from Istanbul",
+      "7-night overwater bungalow",
+      "All meals & non-alcoholic drinks",
+      "All listed activities",
+      "Airport transfers"
+    ],
+    "excludes": [
+      "Alcoholic beverages",
+      "Optional diving courses",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Year-round (peak: Nov–Apr)"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 5 free; 5–12 at 50% adult price",
+    "tags": [
+      "romantic",
+      "beach",
+      "luxury",
+      "all-inclusive"
+    ]
+  },
+  {
+    "id": "PKG-002",
+    "name": "Enchanting Bali Adventure",
+    "destination": "Bali, Indonesia",
+    "region": "Asia",
+    "duration_nights": 7,
+    "duration_days": 8,
+    "type": "Adventure / Cultural",
+    "highlights": [
+      "Ubud rice terraces",
+      "Mount Batur sunrise trek",
+      "Tanah Lot temple",
+      "Traditional cooking class",
+      "White-water rafting"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Denpasar, hotel check-in, welcome briefing",
+      "Day 2: Ubud tour — Monkey Forest, rice terraces, art market",
+      "Day 3: Mount Batur sunrise trek (4 AM start), hot springs",
+      "Day 4: Traditional Balinese cooking class, Tirta Empul temple",
+      "Day 5: White-water rafting on Ayung River, afternoon at leisure",
+      "Day 6: Tanah Lot sunset, Seminyak beach, spa evening",
+      "Day 7: Nusa Penida day trip — Kelingking Beach, Crystal Bay",
+      "Day 8: Checkout, airport transfer"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-002",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights from Istanbul",
+      "7-night hotel (4-star)",
+      "Daily breakfast",
+      "All listed tours & activities",
+      "English-speaking guide",
+      "Airport transfers"
+    ],
+    "excludes": [
+      "Lunches & dinners (except welcome dinner)",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Year-round (avoid Dec–Jan monsoon for trekking)"
+    ],
+    "group_discount": "8% off for groups of 8+",
+    "child_policy": "Children under 3 free; 3–11 at 40% adult price",
+    "tags": [
+      "adventure",
+      "culture",
+      "nature",
+      "trekking"
+    ]
+  },
+  {
+    "id": "PKG-003",
+    "name": "Dubai City & Desert Glamour",
+    "destination": "Dubai, UAE",
+    "region": "Middle East",
+    "duration_nights": 4,
+    "duration_days": 5,
+    "type": "City Break / Luxury",
+    "highlights": [
+      "Burj Khalifa at the Top",
+      "Desert safari with BBQ",
+      "Dubai Mall & fountain show",
+      "Dhow cruise dinner",
+      "Gold & Spice Souks"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Dubai, hotel check-in, evening Dubai Mall & fountain show",
+      "Day 2: Burj Khalifa (At the Top), Dubai Frame, Jumeirah Beach",
+      "Day 3: Morning Gold & Spice Souk, afternoon desert safari with dune bashing, camel ride, BBQ dinner under stars",
+      "Day 4: Dhow Creek cruise dinner, Al Fahidi Historic District, free afternoon for shopping",
+      "Day 5: Checkout, airport transfer"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-003",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights from Istanbul",
+      "4-night 5-star hotel",
+      "Daily breakfast",
+      "All listed activities",
+      "Airport transfers"
+    ],
+    "excludes": [
+      "Lunches & dinners except where noted",
+      "Dubai aquarium/skydive optional add-ons",
+      "Travel insurance"
+    ],
+    "availability": [
+      "Year-round (best: Oct–Apr, avoid Jul–Aug heat)"
+    ],
+    "group_discount": "12% off for groups of 10+",
+    "child_policy": "Children under 4 free; 4–12 at 50% adult price",
+    "tags": [
+      "luxury",
+      "city break",
+      "desert",
+      "shopping",
+      "family"
+    ]
+  },
+  {
+    "id": "PKG-004",
+    "name": "Greek Islands Discovery",
+    "destination": "Santorini & Mykonos, Greece",
+    "region": "Europe",
+    "duration_nights": 7,
+    "duration_days": 8,
+    "type": "Cultural / Leisure",
+    "highlights": [
+      "Santorini caldera sunset",
+      "Mykonos windmills & nightlife",
+      "Catamaran island cruise",
+      "Wine tasting tour",
+      "Oia village walk"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Athens, transfer to Santorini ferry/flight",
+      "Day 2: Fira town walk, caldera views, sunset at Oia",
+      "Day 3: Akrotiri archaeological site, Red Beach, wine tasting",
+      "Day 4: Catamaran cruise around Santorini (hot springs, snorkeling)",
+      "Day 5: Ferry to Mykonos, check-in, Little Venice evening stroll",
+      "Day 6: Mykonos Town, windmills, Delos island optional day trip",
+      "Day 7: Beach day (Paradise Beach), farewell dinner",
+      "Day 8: Depart Mykonos to Istanbul"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-004",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights from Istanbul",
+      "3 nights Santorini + 4 nights Mykonos (4-star)",
+      "Daily breakfast",
+      "Ferry Santorini–Mykonos",
+      "All listed tours",
+      "Airport/port transfers"
+    ],
+    "excludes": [
+      "Lunches & dinners",
+      "Delos optional trip",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Apr–Oct (peak: Jun–Sep)"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 6 free; 6–12 at 45% adult price",
+    "tags": [
+      "culture",
+      "leisure",
+      "beach",
+      "romantic",
+      "Europe"
+    ]
+  },
+  {
+    "id": "PKG-005",
+    "name": "Moroccan Sahara & Imperial Cities",
+    "destination": "Morocco",
+    "region": "Africa",
+    "duration_nights": 8,
+    "duration_days": 9,
+    "type": "Cultural / Adventure",
+    "highlights": [
+      "Camel trek into Sahara Desert",
+      "Overnight desert camp",
+      "Marrakech Medina & Djemaa el-Fna",
+      "Fes ancient medina",
+      "Atlas Mountains pass"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Casablanca, transfer to Marrakech",
+      "Day 2: Marrakech — Medina, Djemaa el-Fna, Majorelle Garden",
+      "Day 3: Marrakech — Bahia Palace, souks, hammam experience",
+      "Day 4: Drive Marrakech–Ouarzazate (Kasbah Aït Benhaddou)",
+      "Day 5: Drive to Merzouga, camel trek at sunset, overnight desert camp",
+      "Day 6: Sunrise over dunes, drive to Fes via Ziz Valley",
+      "Day 7: Fes — ancient medina (UNESCO), tanneries, Medersa Bou Inania",
+      "Day 8: Fes–Chefchaouen (Blue City), free afternoon",
+      "Day 9: Depart from Fes or Casablanca"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-005",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights",
+      "8-night hotels/riad/desert camp",
+      "Daily breakfast + desert camp dinner",
+      "Private driver-guide throughout",
+      "All listed activities"
+    ],
+    "excludes": [
+      "Lunches & most dinners",
+      "Travel insurance",
+      "Gratuities"
+    ],
+    "availability": [
+      "Year-round (best: Mar–May, Sep–Nov)"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 5 free; 5–12 at 45% adult price",
+    "tags": [
+      "adventure",
+      "culture",
+      "desert",
+      "Africa",
+      "UNESCO"
+    ]
+  },
+  {
+    "id": "PKG-006",
+    "name": "Japanese Cherry Blossom Tour",
+    "destination": "Tokyo, Kyoto & Osaka, Japan",
+    "region": "Asia",
+    "duration_nights": 10,
+    "duration_days": 11,
+    "type": "Cultural / Seasonal",
+    "highlights": [
+      "Hanami (cherry blossom viewing)",
+      "Fushimi Inari shrine",
+      "Shibuya & Harajuku",
+      "Bullet train (Shinkansen)",
+      "Tea ceremony experience"
+    ],
+    "itinerary": [
+      "Day 1–3: Tokyo — Shibuya, Harajuku, Asakusa, teamLab digital art",
+      "Day 4: Shinkansen to Kyoto",
+      "Day 5–7: Kyoto — Fushimi Inari, Arashiyama bamboo, Gion district, tea ceremony",
+      "Day 8: Nara day trip (deer park, Todai-ji temple)",
+      "Day 9–10: Osaka — Dotonbori, street food, Osaka Castle, Universal Studios (optional)",
+      "Day 11: Depart Osaka"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "luxury",
+      "gsheet_ref": "PKG-006",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights from Istanbul",
+      "10-night hotels (4-star)",
+      "Daily breakfast",
+      "JR Pass (14-day)",
+      "Airport transfers",
+      "English-speaking guide for first 4 days"
+    ],
+    "excludes": [
+      "Most lunches & dinners",
+      "Travel insurance",
+      "Universal Studios ticket",
+      "Personal shopping"
+    ],
+    "availability": [
+      "Cherry blossom season: late Mar–mid Apr (book 6+ months ahead)"
+    ],
+    "group_discount": "8% off for groups of 8+",
+    "child_policy": "Children under 6 free; 6–12 at 50% adult price",
+    "tags": [
+      "culture",
+      "seasonal",
+      "Asia",
+      "food",
+      "premium"
+    ]
+  },
+  {
+    "id": "PKG-007",
+    "name": "Safari & Zanzibar Combo",
+    "destination": "Tanzania (Serengeti + Zanzibar)",
+    "region": "Africa",
+    "duration_nights": 9,
+    "duration_days": 10,
+    "type": "Wildlife / Beach",
+    "highlights": [
+      "Serengeti National Park Big 5 game drives",
+      "Ngorongoro Crater",
+      "Zanzibar Stone Town (UNESCO)",
+      "Spice tour",
+      "Zanzibar beach relaxation"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Kilimanjaro Airport, transfer to Arusha lodge",
+      "Day 2–3: Serengeti — full-day game drives (Big 5, wildebeest migration seasonal)",
+      "Day 4: Ngorongoro Crater game drive, evening back to Arusha",
+      "Day 5: Fly Arusha → Zanzibar, Stone Town walk",
+      "Day 6: Stone Town UNESCO tour + spice plantation",
+      "Day 7–9: Zanzibar north beaches (Nungwi or Kendwa), snorkeling, dhow sunset",
+      "Day 10: Depart Zanzibar"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "luxury",
+      "gsheet_ref": "PKG-007",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return international flights",
+      "Domestic Arusha–Zanzibar flight",
+      "9-night accommodation (lodge + beach resort)",
+      "All meals on safari",
+      "Breakfast in Zanzibar",
+      "Park fees",
+      "Safari vehicle & guide"
+    ],
+    "excludes": [
+      "Zanzibar lunches & dinners",
+      "Travel insurance",
+      "Visa fees (~$50 USD)",
+      "Gratuities"
+    ],
+    "availability": [
+      "Year-round; wildebeest migration: Jun–Oct"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 5 not recommended for safari; 5–12 at 50% adult price",
+    "tags": [
+      "wildlife",
+      "safari",
+      "beach",
+      "luxury",
+      "Africa",
+      "UNESCO"
+    ]
+  },
+  {
+    "id": "PKG-008",
+    "name": "Thailand Beach & Temple Explorer",
+    "destination": "Bangkok, Chiang Mai & Phuket, Thailand",
+    "region": "Asia",
+    "duration_nights": 9,
+    "duration_days": 10,
+    "type": "Cultural / Beach",
+    "highlights": [
+      "Bangkok Grand Palace & Wat Pho",
+      "Chiang Mai elephant sanctuary",
+      "Phi Phi Islands boat trip",
+      "Thai cooking class",
+      "Full Moon Party (seasonal)"
+    ],
+    "itinerary": [
+      "Day 1–3: Bangkok — Grand Palace, Wat Pho, river cruise, night market",
+      "Day 4: Fly Bangkok → Chiang Mai",
+      "Day 5: Elephant Nature Park half-day, Doi Suthep temple",
+      "Day 6: Thai cooking class, Sunday Night Market",
+      "Day 7: Fly Chiang Mai → Phuket",
+      "Day 8: Phi Phi Islands full-day boat tour, Maya Bay",
+      "Day 9: Patong Beach free day, optional Thai boxing show",
+      "Day 10: Depart Phuket"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-008",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return international flights",
+      "Domestic Bangkok–Chiang Mai–Phuket flights",
+      "9-night hotels (4-star)",
+      "Daily breakfast",
+      "All listed tours",
+      "Airport transfers"
+    ],
+    "excludes": [
+      "Most lunches & dinners",
+      "Travel insurance",
+      "Optional Full Moon Party transport"
+    ],
+    "availability": [
+      "Year-round (best: Nov–Apr)"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 4 free; 4–11 at 45% adult price",
+    "tags": [
+      "beach",
+      "culture",
+      "budget-friendly",
+      "Asia",
+      "food"
+    ]
+  },
+  {
+    "id": "PKG-009",
+    "name": "Swiss Alps & Paris Luxury Rail",
+    "destination": "Switzerland & France",
+    "region": "Europe",
+    "duration_nights": 8,
+    "duration_days": 9,
+    "type": "Luxury / Scenic",
+    "highlights": [
+      "Jungfraujoch 'Top of Europe'",
+      "Lucerne Chapel Bridge",
+      "Paris Eiffel Tower",
+      "Seine River cruise",
+      "Swiss chocolate & cheese experience"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Zurich, transfer to Lucerne",
+      "Day 2: Lucerne — Chapel Bridge, old town, lake cruise",
+      "Day 3: Jungfraujoch excursion, Grindelwald village",
+      "Day 4: Interlaken free time, adventure sports optional (paragliding, skydiving)",
+      "Day 5: Train Interlaken → Bern → Paris (TGV)",
+      "Day 6: Paris — Eiffel Tower, Champs-Élysées, Arc de Triomphe",
+      "Day 7: Paris — Louvre Museum, Notre-Dame, Seine evening cruise",
+      "Day 8: Versailles Palace day trip",
+      "Day 9: Depart Paris CDG"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "luxury",
+      "gsheet_ref": "PKG-009",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights",
+      "8-night 5-star hotels",
+      "Daily breakfast",
+      "Swiss Travel Pass (4 days)",
+      "TGV Paris train",
+      "All listed activities"
+    ],
+    "excludes": [
+      "Lunches & dinners",
+      "Optional adventure sports",
+      "Travel insurance",
+      "Louvre entry (~€22)"
+    ],
+    "availability": [
+      "Year-round (snow sports: Dec–Mar; best scenery: Jun–Sep)"
+    ],
+    "group_discount": "8% off for groups of 6+",
+    "child_policy": "Children under 5 free; 5–12 at 50% adult price",
+    "tags": [
+      "luxury",
+      "Europe",
+      "scenic",
+      "rail",
+      "city break"
+    ]
+  },
+  {
+    "id": "PKG-010",
+    "name": "Egypt Pharaohs & Red Sea",
+    "destination": "Cairo, Luxor & Hurghada, Egypt",
+    "region": "Africa / Middle East",
+    "duration_nights": 8,
+    "duration_days": 9,
+    "type": "Cultural / Beach",
+    "highlights": [
+      "Pyramids of Giza & Sphinx",
+      "Valley of the Kings",
+      "Luxor Temple night show",
+      "Nile cruise (felucca)",
+      "Hurghada Red Sea snorkeling"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Cairo, hotel check-in",
+      "Day 2: Pyramids of Giza, Sphinx, Egyptian Museum",
+      "Day 3: Khan el-Khalili bazaar, Old Cairo (Coptic & Islamic)",
+      "Day 4: Fly Cairo → Luxor; Karnak & Luxor temples",
+      "Day 5: Valley of the Kings, Hatshepsut Temple, felucca Nile sunset",
+      "Day 6: Fly/drive Luxor → Hurghada, beach hotel check-in",
+      "Day 7–8: Red Sea — snorkeling, diving, glass-bottom boat, relaxation",
+      "Day 9: Depart Hurghada"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "budget-friendly",
+      "gsheet_ref": "PKG-010",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights from Istanbul",
+      "Domestic Cairo–Luxor–Hurghada flights",
+      "8-night hotels (4-star)",
+      "Daily breakfast",
+      "All listed tours & entries",
+      "Airport transfers"
+    ],
+    "excludes": [
+      "Lunches & dinners",
+      "Camel ride at pyramids (optional)",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Year-round (best: Oct–Apr; avoid Jul–Aug heat in Luxor)"
+    ],
+    "group_discount": "12% off for groups of 8+",
+    "child_policy": "Children under 4 free; 4–12 at 40% adult price",
+    "tags": [
+      "culture",
+      "history",
+      "beach",
+      "UNESCO",
+      "budget-friendly",
+      "Africa"
+    ]
+  },
+  {
+    "id": "PKG-011",
+    "name": "Cappadocia & Pamukkale Express",
+    "destination": "Turkey (Domestic)",
+    "region": "Turkey",
+    "duration_nights": 4,
+    "duration_days": 5,
+    "type": "Cultural / Nature",
+    "highlights": [
+      "Hot air balloon ride over Cappadocia",
+      "Underground cities",
+      "Göreme Open Air Museum",
+      "Pamukkale travertines & Hierapolis",
+      "Cave hotel stay"
+    ],
+    "itinerary": [
+      "Day 1: Fly Istanbul → Kayseri, transfer to Göreme cave hotel",
+      "Day 2: Hot air balloon at sunrise, Göreme Open Air Museum, valley hikes",
+      "Day 3: Underground city of Derinkuyu, pottery workshop, Avanos",
+      "Day 4: Drive Cappadocia → Pamukkale; travertines & Hierapolis ruins",
+      "Day 5: Return flight to Istanbul"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "budget-friendly",
+      "gsheet_ref": "PKG-011",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Domestic return flights",
+      "4-night hotels (cave hotel in Cappadocia)",
+      "Daily breakfast",
+      "Hot air balloon ride",
+      "All listed tours",
+      "Guide"
+    ],
+    "excludes": [
+      "Lunches & dinners",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Year-round (balloon flights weather-dependent; best: Apr–Jun, Sep–Oct)"
+    ],
+    "group_discount": "10% off for groups of 8+",
+    "child_policy": "Children under 6 free; 6–12 at 45% adult price (balloon age min: 6 years)",
+    "tags": [
+      "domestic",
+      "culture",
+      "nature",
+      "budget-friendly",
+      "Turkey"
+    ]
+  },
+  {
+    "id": "PKG-012",
+    "name": "Northern Lights Iceland Escape",
+    "destination": "Iceland",
+    "region": "Europe",
+    "duration_nights": 5,
+    "duration_days": 6,
+    "type": "Nature / Adventure",
+    "highlights": [
+      "Northern Lights hunt (Aurora Borealis)",
+      "Golden Circle (Geysir, Gullfoss, Þingvellir)",
+      "Blue Lagoon geothermal spa",
+      "Black sand beaches",
+      "Glacier walk"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Reykjavik, hotel, evening city walk",
+      "Day 2: Golden Circle tour — Þingvellir, Geysir, Gullfoss waterfall",
+      "Day 3: Blue Lagoon morning, Reykjavik food tour",
+      "Day 4: South Coast — Seljalandsfoss, Skógafoss waterfalls, black sand beach (Reynisfjara)",
+      "Day 5: Glacier walk on Sólheimajökull + evening Northern Lights hunt",
+      "Day 6: Depart Keflavik airport"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "premium",
+      "gsheet_ref": "PKG-012",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights",
+      "5-night hotels (3–4 star)",
+      "Daily breakfast",
+      "Golden Circle tour",
+      "Blue Lagoon entry",
+      "Glacier walk",
+      "Northern Lights hunt by jeep"
+    ],
+    "excludes": [
+      "Lunches & dinners (except Day 3 food tour)",
+      "Travel insurance",
+      "Aurora photography equipment"
+    ],
+    "availability": [
+      "Northern Lights season: Sep–Mar (best: Nov–Feb)"
+    ],
+    "group_discount": "8% off for groups of 6+",
+    "child_policy": "Children under 8 not recommended for glacier walk; 8–14 at 50% adult price",
+    "tags": [
+      "nature",
+      "adventure",
+      "Europe",
+      "premium",
+      "winter"
+    ]
+  },
+  {
+    "id": "PKG-013",
+    "name": "South America Highlights: Peru & Argentina",
+    "destination": "Peru & Argentina",
+    "region": "South America",
+    "duration_nights": 12,
+    "duration_days": 13,
+    "type": "Adventure / Cultural",
+    "highlights": [
+      "Machu Picchu (UNESCO)",
+      "Inca Trail hike",
+      "Buenos Aires tango show",
+      "Iguazu Falls",
+      "Sacred Valley"
+    ],
+    "itinerary": [
+      "Day 1–2: Arrive Lima, food tour, Miraflores",
+      "Day 3–4: Cusco acclimatization, Sacred Valley, Ollantaytambo",
+      "Day 5–6: Inca Trail trek (2-day express) or train to Aguas Calientes",
+      "Day 7: Machu Picchu sunrise, afternoon return to Cusco",
+      "Day 8: Fly Cusco → Buenos Aires",
+      "Day 9–10: Buenos Aires — La Boca, San Telmo, tango dinner show",
+      "Day 11–12: Iguazu Falls (Argentine & Brazilian sides)",
+      "Day 13: Depart Buenos Aires"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "luxury",
+      "gsheet_ref": "PKG-013",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return + all internal flights",
+      "12-night hotels (4-star)",
+      "Daily breakfast",
+      "Machu Picchu entry",
+      "Inca Trail permit",
+      "All listed tours",
+      "Tango dinner show"
+    ],
+    "excludes": [
+      "Lunches & most dinners",
+      "Travel insurance",
+      "Iguazu Brazilian visa (if required)",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Year-round (Inca Trail closed Feb; dry season May–Oct recommended)"
+    ],
+    "group_discount": "8% off for groups of 6+",
+    "child_policy": "Children under 8 not recommended for Inca Trail; 8–14 at 50% adult price",
+    "tags": [
+      "adventure",
+      "culture",
+      "UNESCO",
+      "South America",
+      "premium",
+      "trekking"
+    ]
+  },
+  {
+    "id": "PKG-014",
+    "name": "Malaysia & Singapore City Break",
+    "destination": "Kuala Lumpur & Singapore",
+    "region": "Asia",
+    "duration_nights": 6,
+    "duration_days": 7,
+    "type": "City Break / Cultural",
+    "highlights": [
+      "Petronas Twin Towers",
+      "Batu Caves",
+      "Gardens by the Bay (Singapore)",
+      "Sentosa Island",
+      "Street food tours both cities"
+    ],
+    "itinerary": [
+      "Day 1–3: Kuala Lumpur — Petronas Towers, Batu Caves, Chinatown, street food night",
+      "Day 4: Train KL → Singapore (Johor Bahru crossing)",
+      "Day 5: Singapore — Marina Bay Sands, Gardens by the Bay, Merlion",
+      "Day 6: Sentosa Island — Universal Studios or beaches, Hawker Centre dinner",
+      "Day 7: Depart Singapore Changi Airport"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-014",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights",
+      "3 nights KL + 3 nights Singapore (4-star)",
+      "Daily breakfast",
+      "KL–Singapore train",
+      "All listed tours",
+      "Airport transfers"
+    ],
+    "excludes": [
+      "Lunches & dinners",
+      "Universal Studios ticket (~$80 USD)",
+      "Travel insurance"
+    ],
+    "availability": [
+      "Year-round"
+    ],
+    "group_discount": "10% off for groups of 8+",
+    "child_policy": "Children under 4 free; 4–12 at 45% adult price",
+    "tags": [
+      "city break",
+      "culture",
+      "Asia",
+      "food",
+      "family"
+    ]
+  },
+  {
+    "id": "PKG-015",
+    "name": "Winter Wonderland Prague & Vienna",
+    "destination": "Czech Republic & Austria",
+    "region": "Europe",
+    "duration_nights": 6,
+    "duration_days": 7,
+    "type": "Cultural / City Break",
+    "highlights": [
+      "Prague Christmas markets",
+      "Prague Castle & Charles Bridge",
+      "Vienna Opera House",
+      "Schönbrunn Palace",
+      "Viennese coffee house culture"
+    ],
+    "itinerary": [
+      "Day 1–3: Prague — Old Town Square, Charles Bridge, Prague Castle, Christmas market",
+      "Day 4: Day trip to Český Krumlov UNESCO town",
+      "Day 5–6: Vienna — Schönbrunn Palace, Belvedere, Ringstrasse, opera evening",
+      "Day 7: Depart Vienna"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-015",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights",
+      "3 nights Prague + 3 nights Vienna (4-star)",
+      "Daily breakfast",
+      "Prague–Vienna train or bus",
+      "All listed tours"
+    ],
+    "excludes": [
+      "Lunches & dinners",
+      "Opera tickets (~€50–150)",
+      "Travel insurance"
+    ],
+    "availability": [
+      "Year-round; Christmas markets: late Nov–Dec 24"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 6 free; 6–12 at 45% adult price",
+    "tags": [
+      "culture",
+      "Europe",
+      "city break",
+      "winter",
+      "UNESCO"
+    ]
+  },
+  {
+    "id": "PKG-016",
+    "name": "Family Fun Orlando & Miami",
+    "destination": "Florida, USA",
+    "region": "Americas",
+    "duration_nights": 10,
+    "duration_days": 11,
+    "type": "Family",
+    "highlights": [
+      "Walt Disney World (2 days)",
+      "Universal Studios",
+      "Kennedy Space Center",
+      "Miami South Beach",
+      "Everglades airboat tour"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Orlando, hotel check-in",
+      "Day 2–3: Walt Disney World (Magic Kingdom + EPCOT)",
+      "Day 4: Universal Studios & Islands of Adventure",
+      "Day 5: Kennedy Space Center, evening SeaWorld",
+      "Day 6: Drive/transfer Orlando → Miami",
+      "Day 7: Miami — South Beach, Art Deco tour, Ocean Drive",
+      "Day 8: Everglades airboat tour, Little Havana",
+      "Day 9: Miami Beach free day, Wynwood Walls art district",
+      "Day 10: Shopping or beach, farewell dinner",
+      "Day 11: Depart Miami"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "premium",
+      "gsheet_ref": "PKG-016",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights",
+      "10-night hotels (4-star, family rooms available)",
+      "Daily breakfast",
+      "Disney 2-day tickets",
+      "Universal 1-day ticket",
+      "Kennedy Space Center",
+      "Everglades tour",
+      "Airport transfers"
+    ],
+    "excludes": [
+      "Most lunches & dinners",
+      "SeaWorld ticket (~$110 USD)",
+      "Travel insurance",
+      "Shopping"
+    ],
+    "availability": [
+      "Year-round (avoid hurricane season Jul–Oct for Miami)"
+    ],
+    "group_discount": "Kids under 12 discounted package rate — ask agent",
+    "child_policy": "Children 3–12 at special family rate (ask for quote); under 3 free",
+    "tags": [
+      "family",
+      "theme parks",
+      "beach",
+      "Americas",
+      "premium"
+    ]
+  },
+  {
+    "id": "PKG-017",
+    "name": "Vietnam North to South Journey",
+    "destination": "Vietnam",
+    "region": "Asia",
+    "duration_nights": 11,
+    "duration_days": 12,
+    "type": "Cultural / Adventure",
+    "highlights": [
+      "Ha Long Bay cruise",
+      "Hoi An Ancient Town (UNESCO)",
+      "Hue Imperial Citadel",
+      "Ho Chi Minh City history tour",
+      "Vietnamese street food trail"
+    ],
+    "itinerary": [
+      "Day 1–2: Hanoi — Hoan Kiem Lake, Old Quarter, Ho Chi Minh Mausoleum",
+      "Day 3–4: Ha Long Bay 2-day/1-night cruise",
+      "Day 5: Fly Hanoi → Da Nang, transfer to Hoi An",
+      "Day 6–7: Hoi An — Ancient Town, cooking class, lantern release evening",
+      "Day 8: Hue — Imperial Citadel, Royal Tombs",
+      "Day 9: Fly Da Nang → Ho Chi Minh City",
+      "Day 10–11: HCMC — War Remnants Museum, Cu Chi Tunnels, Mekong Delta",
+      "Day 12: Depart HCMC"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-017",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return international flights",
+      "Domestic Hanoi–Da Nang–HCMC flights",
+      "11-night hotels (4-star)",
+      "Daily breakfast",
+      "Ha Long Bay cruise (meals included)",
+      "All listed tours"
+    ],
+    "excludes": [
+      "Most lunches & dinners",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Year-round (best: Feb–Apr, Aug–Oct)"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 5 free; 5–12 at 45% adult price",
+    "tags": [
+      "culture",
+      "adventure",
+      "Asia",
+      "UNESCO",
+      "food",
+      "budget-friendly"
+    ]
+  },
+  {
+    "id": "PKG-018",
+    "name": "Umrah Package (Economy)",
+    "destination": "Mecca & Medina, Saudi Arabia",
+    "region": "Middle East",
+    "duration_nights": 7,
+    "duration_days": 8,
+    "type": "Religious",
+    "highlights": [
+      "Umrah rituals (Tawaf, Sa'i, Halq)",
+      "Masjid al-Haram visits",
+      "Prophet's Mosque Medina",
+      "Ziyarat (religious site visits)",
+      "Guided Islamic scholar"
+    ],
+    "itinerary": [
+      "Day 1: Depart Istanbul, arrive Jeddah, transfer to Mecca hotel",
+      "Day 2–4: Mecca — Masjid al-Haram, Umrah rituals, Ziyarat sites (Jabal al-Nour, Mina, Arafat)",
+      "Day 5: Transfer Mecca → Medina",
+      "Day 6–7: Medina — Prophet's Mosque, Quba Mosque, Uhud Mountain",
+      "Day 8: Return to Istanbul"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-018",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Ramadan and Hajj-season rates are higher — inquire separately."
+    },
+    "includes": [
+      "Return flights",
+      "3 nights Mecca (4-star near Haram) + 3 nights Medina (4-star)",
+      "All meals (full board)",
+      "Mecca–Medina bus transfer",
+      "Licensed religious guide",
+      "Ihram distribution"
+    ],
+    "excludes": [
+      "Saudi visa fee (~$80 USD)",
+      "Personal expenses",
+      "Premium hotel upgrades"
+    ],
+    "availability": [
+      "Year-round (Ramadan & peak Hajj season prices higher — inquire separately)"
+    ],
+    "group_discount": "10% off for groups of 10+; Mosque group visit coordination included",
+    "child_policy": "Children under 6 free; 6–12 at 50% adult price",
+    "tags": [
+      "religious",
+      "Umrah",
+      "Middle East",
+      "spiritual",
+      "family"
+    ]
+  },
+  {
+    "id": "PKG-019",
+    "name": "Costa Rica Rainforest & Volcanoes",
+    "destination": "Costa Rica",
+    "region": "Americas",
+    "duration_nights": 8,
+    "duration_days": 9,
+    "type": "Eco-Tourism / Adventure",
+    "highlights": [
+      "Arenal Volcano & hot springs",
+      "Monteverde cloud forest zip-lining",
+      "Manuel Antonio beach & national park",
+      "Wildlife (sloths, toucans, monkeys)",
+      "Sustainable eco-lodge stays"
+    ],
+    "itinerary": [
+      "Day 1: Arrive San José, transfer to Arenal",
+      "Day 2–3: Arenal Volcano hikes, La Fortuna waterfall, hot springs",
+      "Day 4: Transfer Arenal → Monteverde cloud forest",
+      "Day 5: Monteverde — zip-lining, hanging bridges, wildlife night walk",
+      "Day 6: Transfer to Manuel Antonio",
+      "Day 7–8: Manuel Antonio National Park, beach, wildlife spotting",
+      "Day 9: Depart San José"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "premium",
+      "gsheet_ref": "PKG-019",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights",
+      "8-night eco-lodges",
+      "Daily breakfast + 3 dinners",
+      "All listed activities & park entries",
+      "Private transfers throughout",
+      "Naturalist guide"
+    ],
+    "excludes": [
+      "Lunches & remaining dinners",
+      "Travel insurance",
+      "Souvenirs"
+    ],
+    "availability": [
+      "Year-round (dry season Dec–Apr recommended)"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 5 free; 5–12 at 45% adult price",
+    "tags": [
+      "eco-tourism",
+      "adventure",
+      "nature",
+      "wildlife",
+      "Americas"
+    ]
+  },
+  {
+    "id": "PKG-020",
+    "name": "India Golden Triangle & Taj Mahal",
+    "destination": "Delhi, Agra & Jaipur, India",
+    "region": "Asia",
+    "duration_nights": 7,
+    "duration_days": 8,
+    "type": "Cultural / Historical",
+    "highlights": [
+      "Taj Mahal sunrise",
+      "Red Fort Delhi",
+      "Amber Fort Jaipur",
+      "Hawa Mahal",
+      "Old Delhi rickshaw tour",
+      "Mughal cuisine experience"
+    ],
+    "itinerary": [
+      "Day 1: Arrive Delhi, hotel check-in",
+      "Day 2: Old Delhi — Red Fort, Jama Masjid, rickshaw ride; New Delhi — India Gate",
+      "Day 3: Drive Delhi → Agra; Agra Fort, sunset at Taj Mahal",
+      "Day 4: Taj Mahal sunrise, Baby Taj (Itimad-ud-Daulah), drive to Jaipur",
+      "Day 5: Amber Fort elephant ride, City Palace, Hawa Mahal",
+      "Day 6: Jaipur — Jantar Mantar observatory, local markets, pink city walk",
+      "Day 7: Drive Jaipur → Delhi, farewell dinner",
+      "Day 8: Depart Delhi"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-020",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return flights",
+      "7-night heritage hotels (4-star)",
+      "Daily breakfast + 2 dinners",
+      "Private car with driver throughout",
+      "English-speaking guide",
+      "All entry fees"
+    ],
+    "excludes": [
+      "Lunches & remaining dinners",
+      "Travel insurance",
+      "Elephant ride optional (ethical operator)",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Best: Oct–Mar; avoid May–Jun (extreme heat)"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 5 free; 5–12 at 45% adult price",
+    "tags": [
+      "culture",
+      "history",
+      "UNESCO",
+      "Asia",
+      "heritage"
+    ]
+  },
+  {
+    "id": "PKG-021",
+    "name": "Sapanca Lake & Nature Retreat",
+    "destination": "Sapanca & Kartepe",
+    "region": "Turkey",
+    "duration_nights": 2,
+    "duration_days": 3,
+    "type": "Nature / Weekend Escape",
+    "highlights": [
+      "Lake Sapanca boat trip",
+      "Maşukiye forest restaurants and waterfalls",
+      "Kartepe cable car (snow in winter, panoramic views year-round)",
+      "Thermal spring spa",
+      "Fresh trout and nature dining"
+    ],
+    "itinerary": [
+      "Day 1: Depart Istanbul, arrive Sapanca (90 min), lakeside hotel check-in, afternoon boat ride on Lake Sapanca, dinner at forest restaurant in Maşukiye",
+      "Day 2: Morning Kartepe cable car ride, Taraklı Ottoman town optional excursion, afternoon thermal spring bath, evening bonfire/barbecue",
+      "Day 3: Morning walk through forest trails or Maşukiye waterfalls, brunch, return to Istanbul"
+    ],
+    "pricing": {
+      "currency": "TRY",
+      "price_category": "budget-friendly",
+      "gsheet_ref": "PKG-021",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "2-night hotel or chalet accommodation",
+      "Daily breakfast",
+      "1 forest dinner",
+      "Kartepe cable car",
+      "Local guide",
+      "Return transport from Istanbul"
+    ],
+    "excludes": [
+      "Lunches",
+      "Thermal spa entry (optional add-on)",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Year-round (skiing at Kartepe: Dec–Mar; spring greenery: Mar–Jun)"
+    ],
+    "group_discount": "10% off for groups of 8+",
+    "child_policy": "Children under 5 free; 5–12 at 50% adult price",
+    "tags": [
+      "domestic",
+      "nature",
+      "weekend",
+      "family",
+      "romantic",
+      "Turkey",
+      "budget-friendly"
+    ]
+  },
+  {
+    "id": "PKG-022",
+    "name": "Bursa Ottoman Heritage & Uludağ",
+    "destination": "Bursa",
+    "region": "Turkey",
+    "duration_nights": 3,
+    "duration_days": 4,
+    "type": "Cultural / Nature",
+    "highlights": [
+      "Grand Mosque (Ulu Cami) and Ottoman old city",
+      "Green Mosque & Green Tomb",
+      "Uludağ cable car (skiing Dec–Mar; trekking Apr–Oct)",
+      "Koza Han silk market",
+      "İskender kebab — Bursa's signature dish",
+      "Cumalıkızık village (UNESCO World Heritage)"
+    ],
+    "itinerary": [
+      "Day 1: Istanbul → Bursa via Mudanya ferry + bus or direct coach; hotel check-in; Covered Bazaar and Koza Han; İskender kebab dinner",
+      "Day 2: Grand Mosque, Green Mosque & Green Tomb, Bursa City Museum, Tophane neighborhood",
+      "Day 3: Uludağ day trip by cable car (skiing in winter / hiking and panoramic walks in summer); thermal bath evening at Çekirge district",
+      "Day 4: Morning Cumalıkızık Ottoman village walk (UNESCO); return to Istanbul"
+    ],
+    "pricing": {
+      "currency": "TRY",
+      "price_category": "budget-friendly",
+      "gsheet_ref": "PKG-022",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "3-night hotel (4-star)",
+      "Daily breakfast",
+      "All listed tours and entry fees",
+      "Uludağ cable car",
+      "Local guide",
+      "Istanbul–Bursa return transport"
+    ],
+    "excludes": [
+      "Lunches & dinners (except welcome dinner on Day 1)",
+      "Ski equipment rental (optional, seasonal)",
+      "Travel insurance"
+    ],
+    "availability": [
+      "Year-round (skiing: Dec–Mar; hiking and cultural tours: Apr–Nov)"
+    ],
+    "group_discount": "10% off for groups of 8+",
+    "child_policy": "Children under 6 free; 6–12 at 45% adult price",
+    "tags": [
+      "domestic",
+      "culture",
+      "nature",
+      "Ottoman",
+      "UNESCO",
+      "winter sports",
+      "Turkey",
+      "budget-friendly"
+    ]
+  },
+  {
+    "id": "PKG-023",
+    "name": "Trabzon & Eastern Black Sea Discovery",
+    "destination": "Trabzon & Eastern Black Sea",
+    "region": "Turkey",
+    "duration_nights": 4,
+    "duration_days": 5,
+    "type": "Nature / Cultural",
+    "highlights": [
+      "Sümela Monastery (carved into a cliff face, UNESCO-listed)",
+      "Uzungöl mountain lake",
+      "Ayder Plateau and thermal springs",
+      "Rize tea gardens and tea factory visit",
+      "Black Sea cuisine: hamsi (anchovy), kuymak (cheese fondue), cornbread",
+      "Atatürk's Villa overlooking the Black Sea"
+    ],
+    "itinerary": [
+      "Day 1: Fly Istanbul → Trabzon; hotel check-in; Trabzon city center, evening Black Sea seafood dinner",
+      "Day 2: Sümela Monastery in Maçka valley (UNESCO); Trabzon Bazaar and Atatürk's Villa",
+      "Day 3: Drive to Uzungöl mountain lake; Çaykara local village; tea garden experience",
+      "Day 4: Ayder Plateau (Rize province); cable car; thermal spring bath; Rize tea factory visit and local produce market",
+      "Day 5: Morning free in Trabzon; return flight to Istanbul"
+    ],
+    "pricing": {
+      "currency": "TRY",
+      "price_category": "budget-friendly",
+      "gsheet_ref": "PKG-023",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "Return domestic flights Istanbul–Trabzon",
+      "4-night hotels",
+      "Daily breakfast",
+      "2 dinners (Day 1 seafood, Day 4 local)",
+      "All ground transfers within Black Sea region",
+      "Local guide",
+      "Ayder cable car"
+    ],
+    "excludes": [
+      "Lunches",
+      "Thermal spa entry fee (optional)",
+      "Travel insurance",
+      "Personal expenses"
+    ],
+    "availability": [
+      "Year-round (most scenic: May–Sep; Ayder plateau accessible: May–Oct)"
+    ],
+    "group_discount": "10% off for groups of 6+",
+    "child_policy": "Children under 5 free; 5–12 at 45% adult price",
+    "tags": [
+      "domestic",
+      "nature",
+      "culture",
+      "Black Sea",
+      "food",
+      "UNESCO",
+      "Turkey",
+      "budget-friendly"
+    ]
+  },
+  {
+    "id": "PKG-024",
+    "name": "Istanbul City & Bosphorus Experience",
+    "destination": "Istanbul",
+    "region": "Turkey",
+    "duration_nights": 3,
+    "duration_days": 4,
+    "type": "Cultural / City Break",
+    "highlights": [
+      "Hagia Sophia and Blue Mosque",
+      "Topkapi Palace",
+      "Bosphorus cruise (European + Asian shores)",
+      "Grand Bazaar and Spice Bazaar",
+      "Prince's Islands day trip",
+      "Traditional Turkish hammam"
+    ],
+    "itinerary": [
+      "Day 1: Arrival and hotel check-in in Sultanahmet; evening Bosphorus sunset walk and welcome dinner",
+      "Day 2: Hagia Sophia, Blue Mosque, Topkapi Palace, Basilica Cistern; Spice Bazaar and rooftop dinner",
+      "Day 3: Full-day Bosphorus cruise (Rumeli Fortress, Anadolu Kavağı); afternoon Grand Bazaar shopping; traditional hammam evening",
+      "Day 4: Prince's Islands day trip (Büyükada) by ferry; return to Istanbul; departure"
+    ],
+    "pricing": {
+      "currency": "USD",
+      "price_category": "mid-range",
+      "gsheet_ref": "PKG-024",
+      "note": "Live prices are maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a current quote."
+    },
+    "includes": [
+      "3-night hotel (4-star, Sultanahmet or Beyoğlu area)",
+      "Daily breakfast",
+      "Bosphorus cruise",
+      "Prince's Islands ferry",
+      "Hammam session",
+      "All listed entry fees",
+      "Local guide (Days 2–3)"
+    ],
+    "excludes": [
+      "Flights (Istanbul residents or self-arranged arrivals)",
+      "Lunches & most dinners",
+      "Travel insurance",
+      "Personal shopping"
+    ],
+    "availability": [
+      "Year-round (best: Apr–Jun, Sep–Nov)"
+    ],
+    "group_discount": "10% off for groups of 8+",
+    "child_policy": "Children under 6 free; 6–12 at 45% adult price",
+    "tags": [
+      "domestic",
+      "culture",
+      "city break",
+      "history",
+      "romantic",
+      "family",
+      "Turkey",
+      "mid-range"
+    ]
+  }
+]

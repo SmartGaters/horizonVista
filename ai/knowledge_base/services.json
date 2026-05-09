@@ -1,0 +1,94 @@
+[
+  {
+    "id": "SVC-001",
+    "name": "Airport Transfer & Pickup",
+    "type": "Transfer Service",
+    "description": "HorizonVista provides professional door-to-door airport transfer services for arrivals, departures, and inter-city transfers. A driver meets you at arrivals with a name board and monitors your flight for free in case of delays.",
+    "coverage": [
+      "Istanbul Atatürk / Sabiha Gökçen airports (IST, SAW)",
+      "Ankara Esenboğa Airport (ESB)",
+      "Izmir Adnan Menderes Airport (ADB)",
+      "Antalya Airport (AYT)",
+      "Trabzon Airport (TZX)",
+      "Bodrum, Dalaman, Gaziantep and all other major Turkish airports",
+      "International airport transfers on request (coordinated with local partners)"
+    ],
+    "vehicle_options": [
+      "Economy Sedan — 1 to 3 passengers",
+      "Standard Minivan — 4 to 7 passengers",
+      "VIP Mercedes / BMW — 1 to 3 passengers, premium interior",
+      "Minibus — 8 to 15 passengers",
+      "Luxury Coach — 16+ passengers (group transfers)"
+    ],
+    "includes": [
+      "Meet & greet at arrivals gate with name board",
+      "Flight monitoring (driver waits at no extra charge if flight is delayed)",
+      "Bottled water on board",
+      "Assistance with luggage",
+      "Child seat available on request (must be booked in advance)"
+    ],
+    "excludes": [
+      "Parking or toll fees (added to invoice if applicable)",
+      "Gratuities (optional)"
+    ],
+    "booking_policy": "Must be booked at least 24 hours in advance. For same-day bookings contact our WhatsApp line directly.",
+    "pricing": {
+      "currency": "TRY",
+      "price_category": "varies by vehicle type and route",
+      "gsheet_ref": "SVC-001",
+      "note": "Live pricing for each route and vehicle type is maintained in the HorizonVista pricing sheet. Contact us or use the pricing tool for a quote."
+    },
+    "tags": [
+      "transfer",
+      "airport",
+      "pickup",
+      "standalone",
+      "domestic",
+      "international"
+    ]
+  },
+  {
+    "id": "SVC-002",
+    "name": "Hotel Reservation Service",
+    "type": "Accommodation Service",
+    "description": "HorizonVista can research and book hotels on your behalf anywhere in the world — whether it is a city hotel, beach resort, mountain chalet, boutique riad, or budget hostel. We handle the booking, confirmation, and any special requests so you do not have to.",
+    "coverage": "Worldwide — any destination where hotel accommodation is available",
+    "hotel_categories": [
+      "Budget / 2-star",
+      "Standard / 3-star",
+      "Comfort / 4-star",
+      "Luxury / 5-star",
+      "Boutique and design hotels",
+      "Resort and all-inclusive",
+      "Aparthotel and serviced apartments",
+      "Eco-lodge and glamping"
+    ],
+    "special_requests_supported": [
+      "Honeymoon / anniversary room decoration",
+      "Early check-in or late check-out",
+      "Sea view, mountain view, or specific floor preference",
+      "Accessibility needs (wheelchair-accessible rooms)",
+      "Halal-friendly or alcohol-free properties",
+      "Pet-friendly rooms",
+      "Crib or extra bed for children"
+    ],
+    "booking_policy": "Minimum 48 hours advance notice recommended. During peak seasons (summer, religious holidays, New Year) please allow at least 2 weeks. Cancellation and refund terms depend on the hotel's own policy and will be communicated at booking.",
+    "service_fee": {
+      "gsheet_ref": "SVC-002",
+      "note": "A service fee applies for standalone hotel bookings not bundled with an existing HorizonVista tour package. Fee varies by booking complexity. No extra fee when hotel reservation is part of a package."
+    },
+    "pricing": {
+      "currency": "varies (TRY / USD / EUR depending on destination)",
+      "price_category": "varies by hotel and destination",
+      "gsheet_ref": "SVC-002",
+      "note": "Hotel room rates are live market prices. Contact us or use the pricing tool for a quote for your specific dates and destination."
+    },
+    "tags": [
+      "hotel",
+      "accommodation",
+      "worldwide",
+      "standalone",
+      "add-on"
+    ]
+  }
+]

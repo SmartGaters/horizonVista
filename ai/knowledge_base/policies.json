@@ -1,0 +1,65 @@
+{
+  "booking_policy": {
+    "deposit": "A 30% non-refundable deposit is required to confirm any booking.",
+    "full_payment_deadline": "Full payment is due 30 days before departure.",
+    "late_booking": "Bookings made within 14 days of departure require full payment immediately.",
+    "confirmation": "A booking confirmation email with itinerary and vouchers is sent within 24 hours of deposit payment.",
+    "name_changes": "Name changes are allowed up to 21 days before departure for a fee of $50 per person. Not permitted within 21 days.",
+    "group_bookings": "Groups of 6 or more receive priority service and a dedicated agent. One free place for every 20 paying passengers."
+  },
+  "cancellation_policy": {
+    "tiers": [
+      {
+        "notice": "60+ days before departure",
+        "penalty": "Loss of 30% deposit only"
+      },
+      {
+        "notice": "31–59 days before departure",
+        "penalty": "50% of total package price"
+      },
+      {
+        "notice": "15–30 days before departure",
+        "penalty": "75% of total package price"
+      },
+      {
+        "notice": "0–14 days before departure or no-show",
+        "penalty": "100% of total package price (no refund)"
+      }
+    ],
+    "cancellation_process": "All cancellations must be submitted in writing via email to cancellations@horizonvista.com. Phone cancellations are not accepted.",
+    "force_majeure": "In cases of natural disasters, pandemics, or government travel bans, HorizonVista will offer a travel credit valid for 18 months instead of a refund."
+  },
+  "refund_policy": {
+    "processing_time": "Eligible refunds are processed within 14 business days.",
+    "method": "Refunds are issued to the original payment method.",
+    "partial_refunds": "If a specific service fails to be delivered (e.g., a cancelled excursion), a partial refund for that component is issued within 7 business days.",
+    "no_show": "No refund for no-shows unless covered by travel insurance."
+  },
+  "travel_insurance": {
+    "recommendation": "HorizonVista strongly recommends travel insurance for all bookings.",
+    "partner": "We partner with AXA Travel Insurance. Policy can be added during booking for approximately $80–$150 USD per person depending on destination and trip length.",
+    "coverage_highlights": [
+      "Trip cancellation",
+      "Medical emergencies abroad",
+      "Baggage loss/delay",
+      "Flight delays/cancellations"
+    ],
+    "mandatory_destinations": "Travel insurance is mandatory for Maldives, Tanzania, and Iceland packages."
+  },
+  "visa_policy": {
+    "responsibility": "Clients are responsible for obtaining their own visas unless explicitly stated otherwise.",
+    "assistance": "HorizonVista provides visa guidance documents and invitation letters where needed at no extra charge.",
+    "passport_validity": "Passport must be valid for at least 6 months beyond the return date.",
+    "visa_denial": "HorizonVista is not responsible for denied visas. Cancellation fees apply unless travel insurance covers it."
+  },
+  "children_policy": {
+    "infants_under_2": "Infants under 2 travel free on the lap (no separate seat). A cot at the hotel can be arranged.",
+    "unaccompanied_minors": "Unaccompanied minors under 16 are not accepted on group tours.",
+    "family_rooms": "Family rooms are available for most packages. Request at time of booking."
+  },
+  "accessibility_policy": {
+    "statement": "HorizonVista is committed to making travel accessible for all.",
+    "process": "Clients with mobility limitations or medical needs must inform us at least 30 days before departure so we can make appropriate arrangements.",
+    "limitations": "Some adventure activities (e.g., trekking, glacier walks) may not be suitable for all mobility levels. Alternative options will be offered where possible."
+  }
+}

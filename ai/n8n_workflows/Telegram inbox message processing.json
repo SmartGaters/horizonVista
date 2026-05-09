@@ -1,0 +1,430 @@
+{
+  "name": "Telegram inbox message processing",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -528,
+        176
+      ],
+      "id": "42e00b50-ccb0-4e04-b54d-f6052942614d",
+      "name": "Telegram Trigger",
+      "webhookId": "c71fcb61-6e4d-4392-820b-ea299f146a1d",
+      "credentials": {
+        "telegramApi": {
+          "id": "x191flk8txBMUMFd",
+          "name": "horizonvista"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "801f92a3-9f64-49eb-92a2-79c94b751b27",
+                    "leftValue": "={{ $json.message.voice }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Voice note message"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "text"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -224,
+        176
+      ],
+      "id": "730b137a-5101-4fdc-a9bb-782567295195",
+      "name": "Split according to message type"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        48,
+        0
+      ],
+      "id": "7c8fb116-8c98-452e-9ae0-8562c22fe7d2",
+      "name": "Get the recording file",
+      "webhookId": "bd583253-cdf5-484e-9a22-2ff41d024746",
+      "credentials": {
+        "telegramApi": {
+          "id": "x191flk8txBMUMFd",
+          "name": "horizonvista"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/audio/transcriptions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=bearer YOUR_GROQ_API_KEY_HERE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "whisper-large-v3-turbo"
+            },
+            {
+              "name": "temperature",
+              "value": "0.5"
+            },
+            {
+              "name": "response_format",
+              "value": "verbose_json"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        496,
+        0
+      ],
+      "id": "74363dce-68b8-49b8-aeef-8a0b83d8a83e",
+      "name": "convert audio to text using grok"
+    },
+    {
+      "parameters": {
+        "jsCode": "const binary = items[0].binary;\nbinary.data.fileName = 'audio.mp3'; // Change the name here\nbinary.data.fileExtension= 'mp3';\nreturn [{ binary }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        0
+      ],
+      "id": "8aa7b5a1-81a6-4406-9962-eb2c96b6303d",
+      "name": "change file extenstion to mp3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "efcc887b-2d2b-4774-9d85-4f82c0d211fb",
+              "name": "text",
+              "value": "={{ $('Telegram Trigger').item.json.message.text || $json.text}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        192
+      ],
+      "id": "cdab4f4c-5a86-49a1-9914-38e3963cce49",
+      "name": "define input variable"
+    },
+    {
+      "parameters": {
+        "operation": "sendChatAction",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1040,
+        -48
+      ],
+      "id": "40d21301-485a-45a6-8bb0-57decc36d316",
+      "name": "simulate typing status",
+      "webhookId": "1d4b3a4e-2361-48ce-b8bf-7124086e3bbe",
+      "credentials": {
+        "telegramApi": {
+          "id": "x191flk8txBMUMFd",
+          "name": "horizonvista"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.hamzasallam.online/webhook/horizonvista/api/send-message",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "={{ $json.text }}"
+            },
+            {
+              "name": "sessionId",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1040,
+        192
+      ],
+      "id": "04a7e337-3e1b-45c8-bbf3-187edac14362",
+      "name": "Call our agent",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "JFlbt8fJej0m6VYd",
+          "name": "horizon vista api key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get AI output (adjust field if needed)\nlet text = $json.output || \"\";\n\n// 1. Normalize quotes and remove weird unicode\ntext = text\n  .replace(/[“”]/g, '\"')\n  .replace(/[‘’]/g, \"'\")\n  .replace(/\\u200B/g, '')   // zero-width space\n  .replace(/\\u200C/g, '')\n  .replace(/\\u200D/g, '')\n  .replace(/\\uFEFF/g, '');\n\n// 2. Escape Telegram MarkdownV2 special characters\nconst escapeChars = [\n  '_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!'\n];\n\nescapeChars.forEach(char => {\n  const regex = new RegExp(`\\\\${char}`, 'g');\n  text = text.replace(regex, `\\\\${char}`);\n});\n\n// 3. Restore simple formatting (optional)\n// Allow *bold* only (remove escaping around it)\ntext = text.replace(/\\\\\\*(.*?)\\\\\\*/g, '*$1*');\n\n// 4. Clean excessive backslashes (just in case)\ntext = text.replace(/\\\\\\\\/g, '\\\\');\n\n// 5. Trim\ntext = text.trim();\n\n// Return cleaned text\nreturn [\n  {\n    json: {\n      text: text\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        192
+      ],
+      "id": "f70250a3-e630-427d-b218-eeea3e610857",
+      "name": "Format the response"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{$json.text}}",
+        "replyMarkup": "forceReply",
+        "forceReply": {},
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "MarkdownV2",
+          "reply_to_message_id": "={{ $('Telegram Trigger').first().json.message.message_id }}"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1456,
+        192
+      ],
+      "id": "58bddfb7-55a9-4d5b-9c91-5938129e0970",
+      "name": "Send message",
+      "webhookId": "7d2414f6-0df2-4019-9bc3-9c068a90b10c",
+      "credentials": {
+        "telegramApi": {
+          "id": "x191flk8txBMUMFd",
+          "name": "horizonvista"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 74163638,
+          "message": {
+            "message_id": 75,
+            "from": {
+              "id": 1189320548,
+              "is_bot": false,
+              "first_name": "H",
+              "username": "Hcodes88",
+              "language_code": "en"
+            },
+            "chat": {
+              "id": 1189320548,
+              "first_name": "H",
+              "username": "Hcodes88",
+              "type": "private"
+            },
+            "date": 1777234962,
+            "text": "انا ميزانيتي ٧٠٠ يورو . عايز اروح لاسبوع واحد فقط . هسكو مع صديقي في فرانكفورت وهنحاول نلف دول اوربية   هل ال٧٠٠ كفاية"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Call our agent": [
+      {
+        "json": {
+          "output": "٧٠٠ يورو لمدة أسبوع واحد، مع الإقامة المجانية في فرانكفورت، هو مبلغ ممكن ولكن سيتطلب منك تخطيطًا دقيقًا للميزانية، خاصة إذا كنت ترغب في زيارة دول أوروبية أخرى.\n\nإليك بعض النقاط التي يجب أن تأخذها في الاعتبار:\n\n*   **المواصلات بين الدول:** تذاكر القطارات أو الحافلات بين الدول يمكن أن تكون مكلفة. ستحتاج للبحث عن خيارات اقتصادية مثل الحافلات (FlixBus مثلاً) أو تذاكر الطيران منخفض التكلفة إذا حجزت مبكرًا.\n*   **المواصلات داخل المدن:** ستحتاج لميزانية للتنقل داخل فرانكفورت والمدن الأخرى التي ستزورها.\n*   **الطعام والشراب:** تناول الطعام في المطاعم بشكل متكرر سيرفع التكلفة. حاول الاعتماد على وجبات سريعة، أو شراء الطعام من المتاجر الكبرى وإعداده إذا أمكن، أو البحث عن المطاعم المحلية ذات الأسعار المعقولة.\n*   **الأنشطة والفعاليات:** الكثير من المتاحف والمعالم السياحية لها رسوم دخول. ابحث عن الأنشطة المجانية أو اشترِ بطاقات مدن سياحية إذا كانت توفر خصمًا جيدًا على الأماكن التي تود زيارتها.\n*   **التأشيرة والتأمين:** تأكد من أن تأشيرة الشنغن تغطي جميع الدول التي تخطط لزيارتها، وضع في اعتبارك تكلفة التأمين الصحي للسفر.\n\nبشكل عام، ٧٠٠ يورو لأسبوع واحد لشخصين (بمعدل ٣٥٠ يورو للفرد) مع الإقامة المجانية يعتبر تحديًا، ولكنه ليس مستحيلًا إذا كنتما حريصين جدًا على كل يورو تنفقانه.\n\nما هي الدول الأوروبية الأخرى التي تفكران في زيارتها؟ معرفة ذلك قد يساعدني في تقديم نصائح أكثر تحديدًا."
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Split according to message type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split according to message type": {
+      "main": [
+        [
+          {
+            "node": "Get the recording file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "define input variable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get the recording file": {
+      "main": [
+        [
+          {
+            "node": "change file extenstion to mp3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "change file extenstion to mp3": {
+      "main": [
+        [
+          {
+            "node": "convert audio to text using grok",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "convert audio to text using grok": {
+      "main": [
+        [
+          {
+            "node": "define input variable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "define input variable": {
+      "main": [
+        [
+          {
+            "node": "Call our agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "simulate typing status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call our agent": {
+      "main": [
+        [
+          {
+            "node": "Format the response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format the response": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "fca6297e-2668-4386-99ea-f05c429c9b4e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0ef319171642ff61a805002a8d3c9810efc150688b66d838b10c1eccf1fabe2e"
+  },
+  "id": "8IZbzxMVHwBxQKoR",
+  "tags": []
+}

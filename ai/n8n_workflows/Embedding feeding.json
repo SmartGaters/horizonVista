@@ -1,0 +1,311 @@
+{
+  "name": "Embedding feeding",
+  "nodes": [
+    {
+      "parameters": {
+        "fieldToSplitOut": "collections",
+        "options": {
+          "destinationFieldName": "collection"
+        }
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        160
+      ],
+      "id": "24d91473-9e5a-4c02-8cb1-8d89d0580ccb",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "06b57dcc-88f1-4d36-9688-323c1d1ab529",
+              "name": "collections",
+              "value": "=['packages','faqs','policies','destinations','contact_support','company_profile','services']",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -560,
+        160
+      ],
+      "id": "75e3c6a9-f146-4364-8fbd-9ea00266d50a",
+      "name": "define document names"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -144,
+        160
+      ],
+      "id": "2161f456-ce33-4140-b293-6c1bfed3a41b",
+      "name": "for each document"
+    },
+    {
+      "parameters": {
+        "collection": "={{ $json.collection }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        128,
+        176
+      ],
+      "id": "a6dac479-1e78-4328-a873-83847dbd8d02",
+      "name": "get data from mongodb",
+      "credentials": {
+        "mongoDb": {
+          "id": "xpFFw7h0b6A7ihiL",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => {\n  const doc = item.json;\n  \n  // remove mongo internals\n  const { _id, __v, createdAt, updatedAt, ...fields } = doc;\n\n  const content = Object.entries(fields)\n    .map(([key, value]) => {\n      const label = key.replace(/_/g, ' ').toUpperCase();\n      const text = typeof value === 'object' \n        ? JSON.stringify(value, null, 2) \n        : value;\n      return `${label}: ${text}`;\n    })\n    .join('\\n');\n\n  return {\n    json: {\n      content,\n      metadata: {\n        source: _id?.toString() || 'unknown',\n        ...Object.fromEntries(\n          Object.entries(fields)\n            .filter(([_, v]) => typeof v === 'string' || typeof v === 'number')\n            .slice(0, 8) // qdrant metadata key limit\n        )\n      }\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        176
+      ],
+      "id": "c8450f75-e36c-4a6b-a053-43732fe54ee0",
+      "name": "parse and prepare metadata"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "tourism_vdb",
+          "mode": "list",
+          "cachedResultName": "tourism_vdb"
+        },
+        "options": {
+          "contentPayloadKey": "=content",
+          "metadataPayloadKey": "metadata"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.3,
+      "position": [
+        624,
+        176
+      ],
+      "id": "c113035d-b7a3-441f-9843-cb70a7ebe3b3",
+      "name": "store it in a Vectore store",
+      "credentials": {
+        "qdrantApi": {
+          "id": "1bbSYLspOdPQvJt0",
+          "name": "smartgaters"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "intfloat/multilingual-e5-large",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        544,
+        496
+      ],
+      "id": "3a3e0421-7225-4094-8dc3-b124741a353e",
+      "name": "embedding model",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "MGrIjmjQCNn3Bvkg",
+          "name": "HuggingFaceApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.content }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "metadata",
+                "value": "={{ $json.metadata }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        848,
+        496
+      ],
+      "id": "eea435ee-c10a-457b-ab32-4fa0741035eb",
+      "name": "Splitter"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        976,
+        176
+      ],
+      "id": "da8d9000-28de-4011-9ab5-77766004852e",
+      "name": "next"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        160
+      ],
+      "id": "505fd886-6091-480c-94d1-c82b288e723c",
+      "name": "Start the Flow"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "for each document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "define document names": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "for each document": {
+      "main": [
+        [],
+        [
+          {
+            "node": "get data from mongodb",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get data from mongodb": {
+      "main": [
+        [
+          {
+            "node": "parse and prepare metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "parse and prepare metadata": {
+      "main": [
+        [
+          {
+            "node": "store it in a Vectore store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "store it in a Vectore store": {
+      "main": [
+        [
+          {
+            "node": "next",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "embedding model": {
+      "ai_embedding": [
+        [
+          {
+            "node": "store it in a Vectore store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Splitter": {
+      "ai_document": [
+        [
+          {
+            "node": "store it in a Vectore store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "next": {
+      "main": [
+        [
+          {
+            "node": "for each document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start the Flow": {
+      "main": [
+        [
+          {
+            "node": "define document names",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "df09b481-957c-4905-b89b-7e3f4bd75991",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0ef319171642ff61a805002a8d3c9810efc150688b66d838b10c1eccf1fabe2e"
+  },
+  "id": "ao7CljCfg1MrDKPP",
+  "tags": []
+}

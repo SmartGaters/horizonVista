@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HorizonVista AI Travel Consultant - Business Value and CRISP-DM</title>
+  <style>
+    :root {
+      --ink: #172026;
+      --muted: #5d6870;
+      --paper: #f7f4ee;
+      --panel: #ffffff;
+      --teal: #087f8c;
+      --green: #2d8a5f;
+      --coral: #d45d50;
+      --gold: #d79b2b;
+      --line: #d8d0c4;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Aptos", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    .deck {
+      scroll-snap-type: y mandatory;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .slide {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 44px 58px 30px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(8,127,140,.08), transparent 40%),
+        linear-gradient(180deg, #fffaf3 0%, #f6f1e8 100%);
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--teal), var(--green), var(--gold), var(--coral));
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .kicker {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--teal);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1, h2 {
+      margin: 0;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 92px);
+      max-width: 980px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 62px);
+      max-width: 1040px;
+    }
+
+    .section-tag {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255,255,255,.72);
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      align-content: center;
+      gap: 24px;
+      padding: 22px 0;
+    }
+
+    .lead {
+      font-size: clamp(22px, 2.8vw, 36px);
+      line-height: 1.22;
+      max-width: 1020px;
+      color: #243038;
+      margin: 0;
+    }
+
+    .body-text {
+      font-size: 24px;
+      line-height: 1.35;
+      max-width: 980px;
+      color: #26343b;
+      margin: 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 18px 44px rgba(23,32,38,.08);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      color: #172026;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 22px;
+      color: #26343b;
+      font-size: 22px;
+      line-height: 1.38;
+    }
+
+    li { margin: 7px 0; }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 14px 36px rgba(23,32,38,.07);
+      font-size: 20px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      padding: 14px 16px;
+      vertical-align: top;
+    }
+
+    th {
+      color: #ffffff;
+      background: var(--teal);
+      font-weight: 800;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 16px;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .bar {
+      height: 30px;
+      border-radius: 5px;
+      background: #e6dfd4;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--green), var(--teal));
+    }
+
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      align-items: center;
+    }
+
+    .step {
+      min-height: 132px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      display: grid;
+      align-content: center;
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(23,32,38,.07);
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .step strong {
+      display: block;
+      color: var(--teal);
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .flow svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 18px 44px rgba(23,32,38,.08);
+    }
+
+    .flow text {
+      font-family: "Aptos", "Segoe UI", Arial, sans-serif;
+      fill: var(--ink);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mark {
+      font-weight: 800;
+      color: var(--teal);
+    }
+
+    @media (max-width: 880px) {
+      .slide { padding: 34px 24px 22px; }
+      header { flex-direction: column; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .journey { grid-template-columns: 1fr; }
+      table { font-size: 16px; }
+      ul { font-size: 19px; }
+      .metric-row { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      body { background: white; }
+      .deck { height: auto; overflow: visible; }
+      .slide {
+        width: 13.333in;
+        height: 7.5in;
+        min-height: 7.5in;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <section class="slide">
+      <header>
+        <div>
+          <div class="kicker">HorizonVista Travel</div>
+          <h1>AI Travel Consultant</h1>
+        </div>
+        <div class="section-tag">Business Value + CRISP-DM</div>
+      </header>
+      <main>
+        <p class="lead">Vista is a multilingual, multi-agent travel consultant that handles planning, pricing, booking leads, complaints, and support across Telegram and web chat.</p>
+        <div class="grid-3">
+          <div class="card"><h3>24/7 service</h3><p class="body-text">Instant answers outside office hours.</p></div>
+          <div class="card"><h3>Live pricing</h3><p class="body-text">Google Sheets controls prices without code changes.</p></div>
+          <div class="card"><h3>Operational capture</h3><p class="body-text">Leads, tickets, memory, and quality scores are logged.</p></div>
+        </div>
+      </main>
+      <footer><span class="mark">Vista</span><span>1 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>The Business Problem</h2><div class="section-tag">Why it matters</div></header>
+      <main>
+        <p class="lead">Travel inquiries arrive when human agents are offline, busy, or working in a different language.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Pain points</h3>
+            <ul>
+              <li>Slow replies turn high-intent customers into missed bookings.</li>
+              <li>Telegram, website chat, Instagram, and WhatsApp fragment the sales process.</li>
+              <li>Pricing changes often because of seasons, routes, and currency.</li>
+              <li>Manual complaint handling gives weak visibility to management.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Business risk</h3>
+            <ul>
+              <li>Revenue leaks after hours.</li>
+              <li>Customer experience varies by agent availability.</li>
+              <li>Leads are not always captured with complete details.</li>
+              <li>Operational quality is hard to measure consistently.</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+      <footer><span class="mark">Vista</span><span>2 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>The Business Opportunity</h2><div class="section-tag">Value proposition</div></header>
+      <main>
+        <p class="lead">Vista converts customer conversations into structured business outcomes: recommendations, prices, leads, tickets, and measurable quality.</p>
+        <div class="grid-3">
+          <div class="card"><h3>More coverage</h3><ul><li>24/7 response</li><li>Text and voice</li><li>Telegram and web</li></ul></div>
+          <div class="card"><h3>More conversion</h3><ul><li>Fast package matching</li><li>Live price calculation</li><li>Booking lead capture</li></ul></div>
+          <div class="card"><h3>More control</h3><ul><li>Staff-editable prices</li><li>MongoDB records</li><li>Evaluation logs</li></ul></div>
+        </div>
+      </main>
+      <footer><span class="mark">Vista</span><span>3 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>CRISP-DM: Business Understanding</h2><div class="section-tag">Phase 1</div></header>
+      <main>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Project goal</h3>
+            <p class="body-text">Build an AI travel consultant that handles the full customer journey from trip planning to booking and complaint support.</p>
+          </div>
+          <div class="card">
+            <h3>Success criteria</h3>
+            <ul>
+              <li>Correct product and policy answers.</li>
+              <li>Live pricing instead of hardcoded prices.</li>
+              <li>Automated leads and support tickets.</li>
+              <li>Turkish, English, and Arabic support.</li>
+              <li>Telegram text and voice support.</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+      <footer><span class="mark">CRISP-DM</span><span>4 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>CRISP-DM: Data Understanding</h2><div class="section-tag">Phase 2</div></header>
+      <main>
+        <p class="lead">The knowledge base is synthetic but realistic, based on the structure of travel-company operations.</p>
+        <table>
+          <tr><th>Data area</th><th>Purpose</th><th>Business meaning</th></tr>
+          <tr><td>Packages</td><td>Tour catalog</td><td>Core product recommendations</td></tr>
+          <tr><td>FAQs and policies</td><td>Reusable answers</td><td>Consistent customer support</td></tr>
+          <tr><td>Destinations</td><td>Travel guides</td><td>Consultative recommendations</td></tr>
+          <tr><td>Services</td><td>Transfers and hotels</td><td>Cross-sell opportunities</td></tr>
+          <tr><td>Google Sheets</td><td>Prices, routes, fees, evaluations</td><td>Business-controlled live data</td></tr>
+        </table>
+      </main>
+      <footer><span class="mark">CRISP-DM</span><span>5 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>CRISP-DM: Data Preparation</h2><div class="section-tag">Phase 3</div></header>
+      <main>
+        <div class="journey">
+          <div class="step"><strong>1</strong>MongoDB raw JSON</div>
+          <div class="step"><strong>2</strong>Flatten readable text</div>
+          <div class="step"><strong>3</strong>Extract metadata</div>
+          <div class="step"><strong>4</strong>Embed multilingual text</div>
+          <div class="step"><strong>5</strong>Store in Qdrant</div>
+          <div class="step"><strong>6</strong>Keep prices in Sheets</div>
+          <div class="step"><strong>7</strong>Fetch price at query time</div>
+        </div>
+        <p class="body-text">The key preparation decision is to embed stable content, while keeping volatile prices outside the vector database.</p>
+      </main>
+      <footer><span class="mark">CRISP-DM</span><span>6 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>n8n Process Architecture</h2><div class="section-tag">System flow</div></header>
+      <main class="flow">
+        <svg viewBox="0 0 1180 520" role="img" aria-label="HorizonVista n8n process architecture">
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#5d6870"></path>
+            </marker>
+            <style>
+              .box{fill:#fff;stroke:#d8d0c4;stroke-width:2;rx:8}
+              .label{font-size:19px;font-weight:800}
+              .small{font-size:14px;fill:#5d6870}
+              .lane{fill:rgba(8,127,140,.08);stroke:#087f8c;stroke-width:2;rx:8}
+              .lane2{fill:rgba(45,138,95,.08);stroke:#2d8a5f;stroke-width:2;rx:8}
+              .lane3{fill:rgba(215,155,43,.10);stroke:#d79b2b;stroke-width:2;rx:8}
+              .line{stroke:#5d6870;stroke-width:2;fill:none;marker-end:url(#arrow)}
+              .dash{stroke:#5d6870;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+            </style>
+          </defs>
+
+          <rect class="lane" x="24" y="30" width="338" height="455"></rect>
+          <text class="label" x="44" y="62">Workflow 1: Knowledge Ingestion</text>
+          <rect class="box" x="58" y="92" width="270" height="54"></rect>
+          <text class="label" x="78" y="125">MongoDB collections</text>
+          <rect class="box" x="58" y="174" width="270" height="64"></rect>
+          <text class="label" x="78" y="202">Flatten JSON</text>
+          <text class="small" x="78" y="222">human text + metadata</text>
+          <rect class="box" x="58" y="266" width="270" height="64"></rect>
+          <text class="label" x="78" y="294">HuggingFace embeddings</text>
+          <text class="small" x="78" y="314">multilingual-e5-large</text>
+          <rect class="box" x="58" y="360" width="270" height="64"></rect>
+          <text class="label" x="78" y="389">Qdrant tourism_vdb</text>
+          <text class="small" x="78" y="409">semantic search payload</text>
+          <path class="line" d="M193 146 V174"></path>
+          <path class="line" d="M193 238 V266"></path>
+          <path class="line" d="M193 330 V360"></path>
+
+          <rect class="lane2" x="420" y="30" width="338" height="455"></rect>
+          <text class="label" x="440" y="62">Workflow 2: Telegram Handler</text>
+          <rect class="box" x="454" y="92" width="270" height="54"></rect>
+          <text class="label" x="474" y="125">Telegram trigger</text>
+          <rect class="box" x="454" y="174" width="270" height="64"></rect>
+          <text class="label" x="474" y="202">Text or voice switch</text>
+          <text class="small" x="474" y="222">voice uses Whisper STT</text>
+          <rect class="box" x="454" y="266" width="270" height="64"></rect>
+          <text class="label" x="474" y="294">Call Agent API</text>
+          <text class="small" x="474" y="314">message + sessionId</text>
+          <rect class="box" x="454" y="360" width="270" height="64"></rect>
+          <text class="label" x="474" y="389">Format and reply</text>
+          <text class="small" x="474" y="409">Telegram MarkdownV2-safe</text>
+          <path class="line" d="M589 146 V174"></path>
+          <path class="line" d="M589 238 V266"></path>
+          <path class="line" d="M589 330 V360"></path>
+
+          <rect class="lane3" x="816" y="30" width="338" height="455"></rect>
+          <text class="label" x="836" y="62">Workflow 3: Agent API</text>
+          <rect class="box" x="850" y="92" width="270" height="54"></rect>
+          <text class="label" x="870" y="125">Webhook endpoint</text>
+          <rect class="box" x="850" y="174" width="270" height="64"></rect>
+          <text class="label" x="870" y="202">Vista Orchestrator</text>
+          <text class="small" x="870" y="222">Gemini primary, Groq fallback</text>
+          <rect class="box" x="850" y="266" width="270" height="64"></rect>
+          <text class="label" x="870" y="294">Tools and sub-agents</text>
+          <text class="small" x="870" y="314">RAG, web, weather, price, booking</text>
+          <rect class="box" x="850" y="360" width="270" height="64"></rect>
+          <text class="label" x="870" y="389">Evaluate and remember</text>
+          <text class="small" x="870" y="409">LLM judge + MongoDB memory</text>
+          <path class="line" d="M985 146 V174"></path>
+          <path class="line" d="M985 238 V266"></path>
+          <path class="line" d="M985 330 V360"></path>
+
+          <path class="dash" d="M328 392 C405 392,390 298,454 298"></path>
+          <path class="line" d="M724 298 H850"></path>
+        </svg>
+      </main>
+      <footer><span class="mark">n8n</span><span>7 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>CRISP-DM: Modeling</h2><div class="section-tag">Phase 4</div></header>
+      <main>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Orchestrator</h3>
+            <ul>
+              <li>Intent understanding</li>
+              <li>RAG retrieval</li>
+              <li>Conversation memory</li>
+              <li>Final response synthesis</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Price Agent</h3>
+            <ul>
+              <li>Google Sheets lookup</li>
+              <li>Currency conversion</li>
+              <li>Discount calculation</li>
+              <li>Structured JSON return</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Booking Agent</h3>
+            <ul>
+              <li>Lead creation</li>
+              <li>Ticket creation</li>
+              <li>Email notifications</li>
+              <li>Reference numbers</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+      <footer><span class="mark">CRISP-DM</span><span>8 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>Live Customer Journey</h2><div class="section-tag">From message to outcome</div></header>
+      <main>
+        <div class="journey">
+          <div class="step"><strong>1</strong>Customer sends message</div>
+          <div class="step"><strong>2</strong>Voice becomes text</div>
+          <div class="step"><strong>3</strong>Agent API receives request</div>
+          <div class="step"><strong>4</strong>Vista searches knowledge</div>
+          <div class="step"><strong>5</strong>Tools calculate or transact</div>
+          <div class="step"><strong>6</strong>Reply is formatted</div>
+          <div class="step"><strong>7</strong>Quality is logged</div>
+        </div>
+      </main>
+      <footer><span class="mark">Journey</span><span>9 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>CRISP-DM: Evaluation</h2><div class="section-tag">Phase 5</div></header>
+      <main>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Quality rubric</h3>
+            <ul>
+              <li>Relevance</li>
+              <li>Correctness</li>
+              <li>Tone</li>
+              <li>Completeness</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Measured results</h3>
+            <div class="metric-row"><span>Overall score</span><div class="bar"><span style="width:86%"></span></div></div>
+            <div class="metric-row"><span>Pass rate</span><div class="bar"><span style="width:93%"></span></div></div>
+            <div class="metric-row"><span>Memory reduction</span><div class="bar"><span style="width:81%"></span></div></div>
+            <p class="body-text">LLM-as-Judge logs every response to Google Sheets for review and improvement.</p>
+          </div>
+        </div>
+      </main>
+      <footer><span class="mark">CRISP-DM</span><span>10 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>CRISP-DM: Deployment</h2><div class="section-tag">Phase 6</div></header>
+      <main>
+        <table>
+          <tr><th>Component</th><th>Role</th><th>Business benefit</th></tr>
+          <tr><td>VPS + Docker Compose</td><td>Hosts services</td><td>Production-style operation</td></tr>
+          <tr><td>MongoDB</td><td>Knowledge, memory, leads, tickets</td><td>Persistent business records</td></tr>
+          <tr><td>Qdrant</td><td>Vector search</td><td>Fast multilingual retrieval</td></tr>
+          <tr><td>n8n</td><td>Workflow automation</td><td>Visual process control</td></tr>
+          <tr><td>Google Sheets</td><td>Prices and evaluations</td><td>Staff-friendly updates</td></tr>
+          <tr><td>Telegram and website</td><td>Customer channels</td><td>Accessible front door</td></tr>
+        </table>
+      </main>
+      <footer><span class="mark">CRISP-DM</span><span>11 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>Business Impact</h2><div class="section-tag">Before vs after</div></header>
+      <main>
+        <table>
+          <tr><th>Metric</th><th>Without AI Agent</th><th>With Vista</th></tr>
+          <tr><td>Response time</td><td>Hours</td><td>Seconds</td></tr>
+          <tr><td>Operating hours</td><td>Business hours only</td><td>24/7</td></tr>
+          <tr><td>Languages</td><td>1-2</td><td>Turkish, English, Arabic</td></tr>
+          <tr><td>Input modes</td><td>Text only</td><td>Text + voice</td></tr>
+          <tr><td>Lead capture</td><td>Manual</td><td>Automated to MongoDB</td></tr>
+          <tr><td>Price updates</td><td>Developer needed</td><td>Google Sheets</td></tr>
+          <tr><td>Complaint handling</td><td>Email or phone only</td><td>Ticket + confirmation</td></tr>
+        </table>
+      </main>
+      <footer><span class="mark">Impact</span><span>12 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>Strategic Value</h2><div class="section-tag">Beyond a chatbot</div></header>
+      <main>
+        <p class="lead">Vista is a sales, service, and operations automation layer for a tourism business.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Revenue value</h3>
+            <ul>
+              <li>Captures after-hours demand.</li>
+              <li>Reduces friction before booking.</li>
+              <li>Supports upsell through packages, transfers, and hotels.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Operational value</h3>
+            <ul>
+              <li>Creates structured records automatically.</li>
+              <li>Lets staff control prices safely.</li>
+              <li>Makes response quality measurable.</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+      <footer><span class="mark">Value</span><span>13 / 14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><h2>Conclusion</h2><div class="section-tag">Final message</div></header>
+      <main>
+        <p class="lead">HorizonVista shows how CRISP-DM can guide an AI automation project from business problem to deployed workflow.</p>
+        <div class="card">
+          <p class="body-text">The system combines RAG, multi-agent design, live business data, n8n automation, multilingual support, voice input, memory, and quality evaluation into one practical travel-consultant platform.</p>
+        </div>
+      </main>
+      <footer><span class="mark">HorizonVista</span><span>14 / 14</span></footer>
+    </section>
+  </div>
+</body>
+</html>

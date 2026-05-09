@@ -1,0 +1,189 @@
+[
+  {
+    "name": "Maldives",
+    "region": "Asia",
+    "language": "Dhivehi (English widely spoken)",
+    "currency": "MVR (USD widely accepted)",
+    "time_zone": "UTC+5",
+    "best_season": "Nov–Apr (dry season)",
+    "visa": "Free 30-day visa on arrival for most nationalities",
+    "climate": "Tropical, 27–31°C year-round",
+    "known_for": "Overwater bungalows, coral reefs, crystal-clear lagoons, marine life"
+  },
+  {
+    "name": "Bali, Indonesia",
+    "region": "Asia",
+    "language": "Balinese / Indonesian (English in tourist areas)",
+    "currency": "IDR",
+    "time_zone": "UTC+8",
+    "best_season": "Apr–Oct (dry)",
+    "visa": "Visa on arrival available for most nationalities ($35 USD)",
+    "climate": "Tropical 26–32°C; wet season Nov–Mar",
+    "known_for": "Hindu temples, rice terraces, surfing, spiritual wellness, nightlife"
+  },
+  {
+    "name": "Dubai, UAE",
+    "region": "Middle East",
+    "language": "Arabic (English widely spoken)",
+    "currency": "AED",
+    "time_zone": "UTC+4",
+    "best_season": "Oct–Apr",
+    "visa": "Free visa on arrival for most nationalities (check requirements)",
+    "climate": "Desert; Oct–Apr: 20–30°C; May–Sep: 38–45°C",
+    "known_for": "Skyscrapers, luxury shopping, desert safaris, gold souks, Burj Khalifa"
+  },
+  {
+    "name": "Santorini & Mykonos, Greece",
+    "region": "Europe",
+    "language": "Greek (English in tourist areas)",
+    "currency": "EUR",
+    "time_zone": "UTC+3 (summer)",
+    "best_season": "Jun–Sep",
+    "visa": "Schengen visa required for Turkish passport holders",
+    "climate": "Mediterranean; Jun–Sep 25–30°C; cool Oct–Mar",
+    "known_for": "Whitewashed villages, caldera sunsets, parties, ancient ruins, wine"
+  },
+  {
+    "name": "Morocco",
+    "region": "Africa",
+    "language": "Arabic, Amazigh, French",
+    "currency": "MAD",
+    "time_zone": "UTC+1",
+    "best_season": "Mar–May, Sep–Nov",
+    "visa": "Visa-free for Turkish passport (90 days)",
+    "climate": "Varies; coastal mild 18–28°C; desert extremes",
+    "known_for": "Sahara desert, medinas, riads, Berber culture, souks, tagine"
+  },
+  {
+    "name": "Japan",
+    "region": "Asia",
+    "language": "Japanese (limited English outside cities)",
+    "currency": "JPY",
+    "time_zone": "UTC+9",
+    "best_season": "Mar–Apr (cherry blossom), Oct–Nov (autumn)",
+    "visa": "Visa required for Turkish passport (apply at Japanese consulate)",
+    "climate": "Temperate; cherry blossom Apr: 10–18°C; summer: hot & humid",
+    "known_for": "Cherry blossoms, temples, anime, cuisine, bullet trains, Mount Fuji"
+  },
+  {
+    "name": "Tanzania & Zanzibar",
+    "region": "Africa",
+    "language": "Swahili, English",
+    "currency": "TZS",
+    "time_zone": "UTC+3",
+    "best_season": "Jun–Oct (dry, best safari)",
+    "visa": "Visa required (~$50 USD, obtainable online)",
+    "climate": "Safari: dry Jun–Oct; Zanzibar: tropical 25–32°C",
+    "known_for": "Serengeti, Big 5, wildebeest migration, Kilimanjaro, Zanzibar beaches"
+  },
+  {
+    "name": "Thailand",
+    "region": "Asia",
+    "language": "Thai (English in tourist areas)",
+    "currency": "THB",
+    "time_zone": "UTC+7",
+    "best_season": "Nov–Apr (cool & dry)",
+    "visa": "Visa-free for Turkish passport (30 days)",
+    "climate": "Tropical 28–35°C; rainy season May–Oct",
+    "known_for": "Temples, beaches, street food, elephants, nightlife, island hopping"
+  },
+  {
+    "name": "Switzerland & France",
+    "region": "Europe",
+    "language": "German/French/Italian (Swiss); French (France)",
+    "currency": "CHF (Swiss), EUR (France)",
+    "time_zone": "UTC+2 (summer)",
+    "best_season": "Jun–Sep (scenery), Dec–Mar (skiing)",
+    "visa": "Schengen visa required for Turkish passport holders",
+    "climate": "Alpine: cool to cold; Paris: mild 15–25°C summer",
+    "known_for": "Alps, skiing, chocolate, watches, Eiffel Tower, Louvre, wine"
+  },
+  {
+    "name": "Egypt",
+    "region": "Africa / Middle East",
+    "language": "Arabic (English in tourist areas)",
+    "currency": "EGP",
+    "time_zone": "UTC+3",
+    "best_season": "Oct–Apr",
+    "visa": "Visa on arrival ($25 USD) or e-visa",
+    "climate": "Oct–Apr: 18–28°C; May–Sep: extremely hot (40°C+) especially in Luxor",
+    "known_for": "Pyramids, pharaonic history, Nile, Red Sea diving, bazaars"
+  },
+  {
+    "name": "Iceland",
+    "region": "Europe",
+    "language": "Icelandic (English widely spoken)",
+    "currency": "ISK",
+    "time_zone": "UTC+0",
+    "best_season": "Jun–Aug (midnight sun), Sep–Mar (Northern Lights)",
+    "visa": "Schengen visa required for Turkish passport holders",
+    "climate": "Cold: summer 10–15°C; winter -5–5°C; very windy",
+    "known_for": "Northern Lights, geysers, waterfalls, glaciers, Blue Lagoon, puffins"
+  },
+  {
+    "name": "Peru & Argentina",
+    "region": "South America",
+    "language": "Spanish (some Quechua in Peru)",
+    "currency": "PEN (Peru), ARS (Argentina)",
+    "time_zone": "UTC-5 (Peru), UTC-3 (Argentina)",
+    "best_season": "May–Oct (Inca Trail dry season)",
+    "visa": "Visa-free for Turkish passport in both countries (check current status)",
+    "climate": "Lima: mild 18–25°C; Cusco: cold nights at altitude; Buenos Aires: temperate",
+    "known_for": "Machu Picchu, Inca Trail, Buenos Aires tango, Iguazu Falls, Patagonia"
+  },
+  {
+    "name": "Istanbul",
+    "region": "Turkey",
+    "language": "Turkish",
+    "currency": "TRY",
+    "time_zone": "UTC+3",
+    "best_season": "Apr–Jun, Sep–Oct",
+    "visa": "No visa needed for Turkish citizens; e-visa or visa-on-arrival for most international visitors",
+    "climate": "Mediterranean-influenced; summers 28–34°C, winters 3–10°C with occasional snow",
+    "known_for": "Hagia Sophia, Topkapi Palace, Bosphorus, Grand Bazaar, Galata Tower, Turkish cuisine, hammams, historic mosques"
+  },
+  {
+    "name": "Sapanca & Kartepe",
+    "region": "Turkey",
+    "language": "Turkish",
+    "currency": "TRY",
+    "time_zone": "UTC+3",
+    "best_season": "Mar–Jun (spring greenery), Dec–Feb (skiing at Kartepe)",
+    "visa": "No visa needed",
+    "climate": "Mild and green; spring 15–22°C; summer up to 30°C; snowy winters at Kartepe elevation",
+    "known_for": "Lake Sapanca (freshwater lake), Kartepe ski resort, Maşukiye forest restaurants and waterfalls, thermal springs, peaceful nature escapes from Istanbul (90 min)"
+  },
+  {
+    "name": "Bursa",
+    "region": "Turkey",
+    "language": "Turkish",
+    "currency": "TRY",
+    "time_zone": "UTC+3",
+    "best_season": "Apr–Jun, Sep–Oct",
+    "visa": "No visa needed",
+    "climate": "Temperate; spring/autumn mild 15–22°C; Uludağ peak: snowy Nov–Apr",
+    "known_for": "Ottoman capital heritage, Grand Mosque (Ulu Cami), Green Mosque and Tomb, Uludağ ski resort, İskender kebab, silk market (Koza Han), thermal baths, Cumalıkızık village (UNESCO)"
+  },
+  {
+    "name": "Trabzon & Eastern Black Sea",
+    "region": "Turkey",
+    "language": "Turkish",
+    "currency": "TRY",
+    "time_zone": "UTC+3",
+    "best_season": "May–Sep (lush green landscapes)",
+    "visa": "No visa needed",
+    "climate": "Humid and green year-round; summers 20–28°C; heavy rainfall Nov–Mar",
+    "known_for": "Sümela Monastery (UNESCO-listed cliff monastery), Uzungöl mountain lake, Ayder Plateau, Black Sea tea gardens, hamsi (anchovy) cuisine, Atatürk's Villa, Rize tea plantations"
+  },
+  {
+    "name": "Cappadocia & Pamukkale",
+    "region": "Turkey",
+    "language": "Turkish",
+    "currency": "TRY",
+    "time_zone": "UTC+3",
+    "best_season": "Apr–Jun, Sep–Oct (balloon flights; avoid winter fog)",
+    "visa": "No visa needed",
+    "climate": "Continental; Cappadocia: hot summers 30°C+, cold winters -5°C; Pamukkale: mild Mediterranean",
+    "known_for": "Cappadocia hot air balloons, underground cities, cave hotels, Göreme Open Air Museum, Pamukkale travertine terraces, Hierapolis ancient ruins"
+  }
+]

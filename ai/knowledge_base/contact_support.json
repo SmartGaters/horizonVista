@@ -1,0 +1,31 @@
+{
+  "general_inquiries": {
+    "phone": "+90 541 420 5935",
+    "email": "info@horizonvista.com",
+    "hours": "Mon–Sat 09:00–18:00 (Istanbul time, UTC+3)"
+  },
+  "bookings": {
+    "phone": "+90 212 555 0101",
+    "email": "bookings@horizonvista.com"
+  },
+  "cancellations": {
+    "email": "cancellations@horizonvista.com",
+    "note": "Must be in writing"
+  },
+  "traveler_support_24_7": { 
+    "phone": "+90 212 555 0199",
+    "description": "For emergencies during your trip"
+  },
+  "corporate": {
+    "email": "corporate@horizonvista.com"
+  },
+  "complaints": {
+    "email": "support@horizonvista.com",
+    "response_time": "10 business days"
+  },
+  "whatsapp": "+90 555 123 4567",
+  "social_media": {
+    "instagram": "@horizonvista",
+    "facebook": "HorizonVistaTravel"
+  }
+}

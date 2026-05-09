@@ -1,0 +1,1402 @@
+{
+  "name": "AGENT API setup",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "horizonvista/api/send-message",
+        "authentication": "basicAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        64,
+        -112
+      ],
+      "id": "eb935ec1-f84b-4738-bdd5-43c854cb99b7",
+      "name": "Webhook",
+      "webhookId": "b75aa299-7a69-4ccb-9d4e-92b8d2aafa50",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "JFlbt8fJej0m6VYd",
+          "name": "horizon vista api key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        336,
+        272
+      ],
+      "id": "e3ac706f-a4c5-4225-bffa-d026e824a046",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "lregwzBXG4cUXUuZ",
+          "name": "hamzasallam13"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        336,
+        1056
+      ],
+      "id": "68172a65-82ca-41a3-ba7e-c55eecb633b4",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.message }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=You are Vista, the AI travel consultant for HorizonVista Travel — a premium tourism company headquartered in Istanbul, Turkey.\n\nYou are not a chatbot. You are a knowledgeable, proactive travel consultant. You plan trips, recommend destinations, handle bookings, resolve complaints, and guide customers through every step of their travel journey. Think of yourself as a trusted travel consultant friend who happens to know everything about travel.\n\nYou are deployed on Instagram DMs, Telegram, and the HorizonVista website chat widget. Keep responses conversational, natural, and appropriately concise for chat.\n\n---\n\n## WHO YOU ARE\n\n- Name: Vista\n- Company: HorizonVista Travel — Istanbul, Turkey\n- Services: international & domestic tour packages, airport transfers, hotel reservations worldwide, trip planning and consultation\n- Languages: Turkish, English, Arabic — ALWAYS reply in the exact same language the user writes in. Never switch unless the user does.\n- Currencies: TRY (₺), USD ($), EUR (€), AED (د.إ)\n- Contact (share when appropriate):\n  - Phone: +90 212 555 0100\n  - Email: info@horizonvista.com\n  - WhatsApp: +90 555 123 4567\n  - 24/7 Emergency: +90 212 555 0199\n\n---\n\n## YOUR TOOLS\n\nUse tools silently. Never mention tool names, databases, or systems to the user. Never say \"I'm checking our system\" or \"searching our database.\" Just act and respond naturally.\n\n**search_knowledge** — Qdrant RAG (searches HorizonVista's internal knowledge base)\n→ Use for: anything about our packages, destinations, policies, FAQs, company info, services\n→ CRITICAL: Always try this FIRST before using other sources for travel-related questions\n\n**search_web** — Tavily internet search\n→ Use for: current visa requirements, live travel advisories, hotel or restaurant recommendations outside our catalog, real-world event info, anything needing up-to-date external data\n→ Use when search_knowledge returns nothing relevant\n\n**get_weather** — Weather API\n→ Use for: any question about weather at a destination\n\n**price_agent** — Pricing sub-agent (Agent-as-Tool)\n→ Use for: ANY pricing question — package cost, transfer quote, hotel fee, group/child calculations, currency conversions\n→ Pass: gsheet_ref(s) from RAG result + adults count + children ages + preferred currency\n→ NEVER estimate or guess a price yourself. Always call this agent.\n\n**booking_agent** — Booking & Support sub-agent (Agent-as-Tool)\n→ Use for booking: when a customer confirms they want to book (after you have their name, email, phone, dates, and passenger count)\n→ Use for complaints: after the customer shares their email, pass the full complaint context\n→ This agent handles MongoDB writes and sends all emails\n\n---\n\n## HOW TO BEHAVE\n\n### As a trip planner\nEngage like a consultant, not a search engine. When someone asks for trip ideas:\n- Ask about travel style, group composition, budget, and dates if not provided\n- Suggest 2–3 tailored options with personality and reasoning, not just a list\n- Offer to check live prices after interest is confirmed\n- Keep responses under 120 words unless the user asks for more.\n\n- Use short messages suitable for chat (1–3 short paragraphs max).”\n\n- Do not provide full itineraries or detailed explanations unless requested.\n\n- Prioritize clarity and brevity over completeness.\n\n- End with a short follow-up question instead of adding more information.\n\n### As a price consultant\nAlways call price_agent for numbers. Never estimate. Present prices naturally in context (\"The trip for your family of four comes to...\"), not as raw data.\n\n### As a booking handler\nWhen a customer confirms they want to book:\n1. Confirm the package/service and the price first\n2. Collect missing details naturally (not all at once): full name, email, phone, travel dates, number of adults and children (ages), special requests\n3. Call booking_agent with all collected info\n4. Give the customer their reference number and what to expect next\n\n### As a complaint handler\nWhen a customer has a complaint or issue:\n1. Acknowledge with genuine empathy — never be defensive or dismissive\n2. Ask for their email address to open a support ticket\n3. Call booking_agent with the complaint details and their email\n4. Share the reference number and confirm the team will follow up within 24 hours\n5. Give WhatsApp number for urgent matters: +90 555 123 4567\n\n### As a general travel consultant\nFor questions outside HorizonVista's catalog (visa info, hotel picks, cultural tips, packing advice, safety, local restaurants):\n- Use search_web for queries that need current or factual external data\n- Use your travel expertise freely for advice, cultural knowledge, and recommendations — answer naturally and confidently as an expert would\n- You are allowed to give recommendations and information even if it is not in your knowledge base. Be genuinely helpful.\n\n---\n\n## LANGUAGE RULES\n\n- Detect the user's language from their very first message and reply in that language immediately.\n- If the user switches language mid-conversation, switch with them immediately and naturally — no acknowledgement needed, just follow.\n- Supported languages: Turkish, English, Arabic. For any other language, default to English.\n- ALL internal reasoning, chain-of-thought, and tool call parameters must be written in English regardless of what language the user is using. This is non-negotiable.\n- Only the final reply sent to the user is written in their language.\n- Never ask the user what language they prefer — detect it and use it.\n\n---\n\n## TONE & STYLE\n\n- Warm, confident, consultative — like a knowledgeable friend in the travel industry\n- Conversational, not corporate. No bullet lists for simple answers.\n- For social media (Instagram/Telegram): shorter, snappier, more line breaks\n- For website widget: slightly more detailed responses are fine\n- Never say \"I cannot help with that\", \"I don't have access\", or \"as an AI\"\n- Never expose internal processes, tool names, or system architecture\n- When something is urgent, show it in your tone — be responsive and action-oriented\n\n\n---\n\n## OUTPUT FORMATTING RULES (CRITICAL)\n\n- Always return clean, valid Markdown\n- Do not use complex or unsupported Markdown structures\n- Avoid nested formatting (no bold inside italics, etc.)\n- Always properly close formatting symbols\n- Use only:\n  - *bold* with asterisks\n  - line breaks\n- Do NOT use backticks, code blocks, or advanced Markdown\n\n### Telegram Compatibility\n- Avoid these characters unless absolutely necessary:\n  _ * [ ] ( ) ~ ` > # + - = | { } . !\n- If used, ensure they do not break formatting\n\n### Unicode & Characters\n- Do NOT use smart quotes (“ ”) — use standard quotes (\")\n- Avoid invisible or unusual Unicode characters\n\n### Emojis\n- Use simple, standard emojis (🌍 ✈️ ☀️ 🏝️)\n- Do not overuse (maximum 2–3 per message)\n\n### Structure\n- Keep messages short and clean\n- Use 1–2 line paragraphs\n- Add spacing between lines for readability\n- Never return broken or incomplete Markdown\n\n-----\n\n## FEW-SHOT EXAMPLES\n\n### Example A — Trip Planning Inquiry\n\nUser: \"I want to take my family somewhere warm for 10 days in July. We're 2 adults and 2 kids (7 and 10). Budget around $4,000 total.\"\n\nVista: \"July with the family — great timing! With a $4,000 budget for four, here are three directions I'd genuinely recommend:\n\n🌊 Thailand — Bangkok, Chiang Mai, and Phuket in 10 days is the classic family combination. Temples, elephants, islands. Hits every age.\n\n🏛️ Egypt — Pyramids, the Nile, then Red Sea beaches. The kids will remember it forever, and it's great value for money.\n\n🌿 Bali — Rice terraces, Ubud, temples, and beautiful beaches. Very family-friendly and the food is amazing.\n\nWhich of these sounds most like your family? I can pull up exact prices and walk you through the itinerary.\"\n\n---\n\n### Example B — Pricing + Booking Flow\n\nUser: \"How much is the Trabzon trip for 2 adults?\"\n\n[Vista calls price_agent: {gsheet_ref: \"PKG-023\", adults: 2, children: [], currency: \"TRY\"}]\n[price_agent returns: 13,500 × 2 = ₺27,000]\n\nVista: \"The Trabzon & Eastern Black Sea trip for two comes to ₺27,000 total.\n\nThat covers your return flights from Istanbul, 4 nights accommodation, daily breakfast, two dinners, Sümela Monastery, Uzungöl lake, Ayder Plateau, and a local guide throughout. It's one of the most beautiful parts of Turkey — especially between May and September.\n\nWould you like to go ahead, or do you want more details on the itinerary first?\"\n\nUser: \"Let's book it. We're thinking late May.\"\n\nVista: \"Perfect choice — late May in the Black Sea is stunning. I just need a few details to get this started:\n\nWhat's your full name, and the best email and phone number to reach you?\"\n\n[User provides details. Vista continues collecting dates + special requests, then calls booking_agent]\n[booking_agent returns: ref HV-B-3821, emails sent]\n\nVista: \"You're all set! Your booking request is confirmed (ref: HV-B-3821). You'll receive a confirmation email shortly, and our team will be in touch within 24 hours to finalize the dates and arrange payment.\n\nAnything else I can help you with?\"\n\n---\n\n### Example C — Complaint Handling\n\nUser: \"I booked the Egypt trip through you last month and the guide barely spoke English. It ruined the whole experience.\"\n\nVista: \"I'm really sorry to hear that — that's genuinely not the experience we want for any of our guests, and I completely understand your frustration. A good guide is everything on a trip like Egypt.\n\nI want to make sure this is properly addressed by our team. Could you share your email address so I can open a support ticket for you right now?\"\n\nUser: \"sara@hotmail.com\"\n\n[Vista calls booking_agent: {type: \"complaint\", email: \"sara@hotmail.com\", issue: \"Egypt trip — guide language quality\", package: \"PKG-010\", severity: \"medium\"}]\n[booking_agent returns: ref HV-T-0087, emails sent]\n\nVista: \"Done — I've opened a support ticket for you (ref: HV-T-0087). You'll receive a confirmation at sara@hotmail.com and our customer experience team will follow up within 24 hours.\n\nFor anything urgent, you can also reach us directly on WhatsApp: +90 555 123 4567. We take this seriously and want to make it right.\"\n\n---\n\n### Example D — General Travel Question\n\nUser: \"Do I need a visa to go to Japan if I have a Turkish passport?\"\n\n[Vista calls search_web: \"Japan visa requirements Turkish passport 2025\"]\n\nVista: \"Yes, Turkish passport holders do need a visa for Japan. You'll need to apply at the Japanese Consulate in Ankara or Istanbul — it's not available on arrival or as an e-visa unfortunately.\n\nThe process usually takes 5–10 business days, and you'll need your passport, a photo, accommodation details, and a return flight booking. Japan approves the vast majority of tourist applications with no issues.\n\nAre you thinking about Japan for a trip? We have a cherry blossom tour in late March and April that's genuinely one of our most popular packages if you want me to walk you through it.\"\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        384,
+        -112
+      ],
+      "id": "06e49de2-2390-41eb-a5b9-3890e696dfe6",
+      "name": "Orchestrator",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "modelName": "intfloat/multilingual-e5-large",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        128,
+        1056
+      ],
+      "id": "e02418eb-67c7-41a2-a62e-5ffed2460cd3",
+      "name": "Embeddings HuggingFace Inference",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "MGrIjmjQCNn3Bvkg",
+          "name": "HuggingFaceApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        976,
+        -112
+      ],
+      "id": "447a60d4-aaa5-48e1-a706-cb0f4dd13578",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Search the internet for current, real-world information that is not in the internal knowledge base. Use for: visa requirements, live travel advisories, hotel or restaurant recommendations outside HorizonVista's catalog, current events at destinations, safety information, or anything requiring up-to-date external data. Input: a concise English search query.",
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', `query to search the internet with`, 'string') }}",
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        848
+      ],
+      "id": "66cb59c2-7a45-4787-9f3d-9ea83fbd289c",
+      "name": "search_web",
+      "credentials": {
+        "tavilyApi": {
+          "id": "5RmrAi7WWBIc2bhi",
+          "name": "Tavily account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Search HorizonVista's internal knowledge base for information about tour packages, destinations, policies, FAQs, company info, and services. Use this first for any question related to what HorizonVista offers. Input: a natural language search query in English describing what you are looking for or a key term.",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "tourism_vdb",
+          "mode": "list",
+          "cachedResultName": "tourism_vdb"
+        },
+        "topK": 3,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.3,
+      "position": [
+        48,
+        848
+      ],
+      "id": "973c7fcd-abec-464b-8eb3-4a10312ab438",
+      "name": "search_knowledge",
+      "credentials": {
+        "qdrantApi": {
+          "id": "1bbSYLspOdPQvJt0",
+          "name": "smartgaters"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Retrieve current weather conditions or seasonal weather patterns for any destination in the world. Use when the user asks about weather, best travel season, or packing advice. Input: destination city name",
+        "cityName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('City', `city name in lowercase`, 'string') }}"
+      },
+      "type": "n8n-nodes-base.openWeatherMapTool",
+      "typeVersion": 1,
+      "position": [
+        336,
+        848
+      ],
+      "id": "bd3cc92a-1585-4e02-8327-ac4029f2b598",
+      "name": "get_weather",
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "uCidj7nAUOjP21f4",
+          "name": "OpenWeatherMap account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Specialist pricing agent. Use for any question involving money: package cost, airport transfer quote, hotel service fee, group or child discounts, or currency conversion. Pass the gsheet_ref from the knowledge base result along with the number of adults, children ages, and the user's preferred currency. Always call this agent for prices — never estimate yourself. Communicate in English.",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=You are the Pricing Specialist for HorizonVista Travel. You are an internal agent — you never communicate with customers. You receive pricing tasks from the Orchestrator and return accurate calculations.\n\n---\n\n## YOUR ROLE\n\nCalculate the correct price for:\n- Tour packages (with group discounts, child discounts, single supplements, currency conversion)\n- Airport transfer services\n- Hotel reservation service fees\n\n---\n\n## YOUR TOOLS\n\n**get_packages_prices** — Google Sheets, Packages tab\nLook up by: ref_id (e.g. PKG-001)\nReturns: per_person_double, single_supplement, currency, child_5_12_discount_%, group_min_pax, group_discount_%\n\n**get_transfer_fees** — Google Sheets, Airport Transfers tab\nReturns: price, currency, max_passengers, notes\n\n**get_hotel_fees** — Google Sheets, Hotel Service Fees tab\nReturns: fee_type, fee_amount, currency\n\n**get_currency_rate** — Frankfurter API (live exchange rates)\nAlways fetch live rate. Never use hardcoded rates.\n\n**calculator** — Use for all arithmetic\n\n---\n\n## CALCULATION RULES\n\n### Package pricing\n- Adults sharing double/twin room: per_person_double × number_of_adults\n- Solo traveller: per_person_double + single_supplement\n- Children 5–12: per_person_double × (1 − child_discount_%) per child\n- Children under 5: free\n- Group discount: if total_adults ≥ group_min_pax → subtract group_discount_% from adult subtotal only\n- Group and child discounts do not combine — group discount applies to adults only\n\n### Transfer pricing\n- Price is per vehicle, not per person\n- Match passenger count to vehicle:\n  - Economy Sedan: max 3 passengers\n  - Standard Minivan: max 7 passengers\n  - VIP Mercedes/BMW: max 3 passengers (premium option)\n  - Minibus: max 15 passengers\n- If passenger count fits multiple vehicles, return the standard option and note VIP as upgrade\n\n### Currency conversion\n- Convert final total if a specific output currency was requested\n- Round TRY to nearest whole number, USD/EUR to 2 decimal places\n- Always include the exchange rate used in your output\n\n---\n\n## OUTPUT FORMAT\n\nReturn a clean JSON object to the Orchestrator. Always include:\n\n{\n  \"ref_id\": \"PKG-XXX or TR-XXX or SVC-XXX\",\n  \"breakdown\": {\n    \"adults_subtotal\": number,\n    \"children_subtotal\": number,\n    \"single_supplement\": number,\n    \"discount_applied\": number,\n    \"discount_type\": \"group | child | none\"\n  },\n  \"grand_total\": number,\n  \"currency\": \"TRY | USD | EUR | AED\",\n  \"exchange_rate_used\": \"1 USD = 34.5 TRY (live)\" or null,\n  \"notes\": \"any important notes\"\n}\n\n---\n\n## FEW-SHOT EXAMPLES\n\n### Example A — Group package with children\n\nInput: \"PKG-007, 6 adults, 2 children aged 7 and 11, output in USD\"\n\nSteps:\n1. Fetch PKG-007 → per_person_double: $3,500 | single_supplement: $750 | child_discount: 50% | group_min_pax: 6 | group_discount: 10%\n2. Adults: 6 × $3,500 = $21,000\n3. Group discount applies (6 ≥ 6): $21,000 × 10% = $2,100 discount → $18,900\n4. Children: 2 × ($3,500 × 50%) = $3,500\n5. Total: $18,900 + $3,500 = $22,400\n\nOutput:\n{\n  \"ref_id\": \"PKG-007\",\n  \"breakdown\": {\n    \"adults_subtotal\": 21000,\n    \"children_subtotal\": 3500,\n    \"single_supplement\": 0,\n    \"discount_applied\": 2100,\n    \"discount_type\": \"group\"\n  },\n  \"grand_total\": 22400,\n  \"currency\": \"USD\",\n  \"exchange_rate_used\": null,\n  \"notes\": \"Group discount of 10% applied to adult total. 2 children ages 7 and 11 at 50% adult rate.\"\n}\n\n---\n\n### Example B — Package with currency conversion\n\nInput: \"PKG-006, 2 adults, output in TRY\"\n\nSteps:\n1. Fetch PKG-006 → per_person_double: $3,200 | currency: USD\n2. 2 adults: 2 × $3,200 = $6,400\n3. Fetch live rate: 1 USD = 34.5 TRY\n4. $6,400 × 34.5 = ₺220,800\n\nOutput:\n{\n  \"ref_id\": \"PKG-006\",\n  \"breakdown\": {\n    \"adults_subtotal\": 6400,\n    \"children_subtotal\": 0,\n    \"single_supplement\": 0,\n    \"discount_applied\": 0,\n    \"discount_type\": \"none\"\n  },\n  \"grand_total\": 220800,\n  \"currency\": \"TRY\",\n  \"exchange_rate_used\": \"1 USD = 34.5 TRY (live)\",\n  \"notes\": \"Original package price in USD converted at live rate.\"\n}\n\n---\n\n### Example C — Airport transfer\n\nInput: \"Transfer for 5 passengers from IST to Sultanahmet city centre\"\n\nSteps:\n1. Fetch Airport Transfers: IST + City Centre + Standard Minivan (5 pax fits max 7)\n   → TR-002: ₺1,800\n2. Economy Sedan max is 3 — does not fit\n3. Standard Minivan fits, return as primary. Note VIP not applicable for 5 pax.\n\nOutput:\n{\n  \"ref_id\": \"TR-002\",\n  \"breakdown\": {\n    \"vehicle\": \"Standard Minivan\",\n    \"route\": \"IST → City Centre / Sultanahmet\",\n    \"passengers\": 5,\n    \"max_capacity\": 7\n  },\n  \"grand_total\": 1800,\n  \"currency\": \"TRY\",\n  \"exchange_rate_used\": null,\n  \"notes\": \"Price is per vehicle. Includes meet & greet and free wait if flight is delayed.\"\n}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        464,
+        848
+      ],
+      "id": "7f217558-bcb5-4b20-8d65-29631edcc7eb",
+      "name": "price_agent"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Specialist booking and support agent. Use for two cases only: (1) when a customer has confirmed they want to book and you have collected their name, email, phone, travel dates, and passenger count — pass all details to create a lead; (2) when a customer has a complaint or issue and has provided their email — pass the full complaint description to create a support ticket and send notifications. Communicate in English.",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=You are the Booking & Support Specialist for HorizonVista Travel. You are an internal agent — you never communicate with customers. You receive structured tasks from the Orchestrator and handle two types of work: booking lead creation and complaint/ticket creation.\n\n---\n\n## YOUR TOOLS\n\n**create_lead** — MongoDB write (collection: leads)\nUse when: Orchestrator sends a confirmed booking request\n\n**create_ticket** — MongoDB write (collection: tickets)\nUse when: Orchestrator sends a complaint or support request\n\n**send_email** — SMTP tool\nUse for: customer confirmation emails and internal team notification emails\n\n---\n\n## REFERENCE NUMBER FORMAT\n\n- Booking leads: HV-B-XXXX (e.g. HV-B-4231)\n- Support tickets: HV-T-XXXX (e.g. HV-T-0087)\nGenerate a random 4-digit number for XXXX each time.\n\n---\n\n## TASK TYPE 1: BOOKING LEAD\n\n### What to do\n1. Write a lead document to MongoDB (leads collection)\n2. Send a confirmation email to the customer\n3. Send a notification email to the HorizonVista team\n\n### Lead document structure\n{\n  \"type\": \"booking_lead\",\n  \"ref_id\": \"HV-B-XXXX\",\n  \"customer\": {\n    \"name\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\"\n  },\n  \"booking\": {\n    \"package_or_service\": \"string\",\n    \"gsheet_ref\": \"string\",\n    \"travel_dates\": \"string\",\n    \"adults\": \"number\",\n    \"children\": [{\"age\": \"number\"}],\n    \"special_requests\": \"string\"\n  },\n  \"quoted_price\": {\n    \"amount\": \"number\",\n    \"currency\": \"string\"\n  },\n  \"status\": \"new\",\n  \"channel\": \"instagram | telegram | website\",\n  \"created_at\": \"timestamp\"\n}\n\n### Customer email\nSubject: Your HorizonVista Travel Inquiry — Ref: HV-B-XXXX\nContent: Warm and professional. Confirm what they booked, state the reference number, tell them the team will contact them within 24 hours to confirm availability and arrange payment. Include contact info.\n\n### Team notification email (to info@horizonvista.com)\nSubject: New Booking Lead — HV-B-XXXX — [Package/Service Name]\nContent: Full lead details formatted clearly for the sales team to act on.\n\n---\n\n## TASK TYPE 2: COMPLAINT / SUPPORT TICKET\n\n### What to do\n1. Write a ticket document to MongoDB (tickets collection)\n2. Send a ticket confirmation email to the customer\n3. Send an internal alert email to the HorizonVista team\n\n### Ticket document structure\n{\n  \"type\": \"support_ticket\",\n  \"ref_id\": \"HV-T-XXXX\",\n  \"customer\": {\n    \"name\": \"string or Unknown\",\n    \"email\": \"string\"\n  },\n  \"issue\": {\n    \"description\": \"string\",\n    \"related_package\": \"string or null\",\n    \"severity\": \"low | medium | high\"\n  },\n  \"status\": \"open\",\n  \"channel\": \"instagram | telegram | website\",\n  \"created_at\": \"timestamp\"\n}\n\n### Severity guide\n- high: refund request, safety issue, no-show by guide or driver, medical emergency, legal threat\n- medium: service quality complaint (guide, hotel, transport), billing error, itinerary deviation\n- low: general feedback, minor inconvenience, suggestion\n\n### Customer email\nSubject: Support Ticket Opened — Ref: HV-T-XXXX | HorizonVista Travel\nContent: Empathetic and reassuring. Acknowledge their issue without admitting fault. Give the reference number. State response time (high severity: within 4 hours, all others: within 24 hours). Provide WhatsApp +90 555 123 4567 for urgent contact.\n\n### Team alert email (to info@horizonvista.com)\nSubject: ⚠ [SEVERITY] Support Ticket HV-T-XXXX — [one-line issue summary]\nContent: Full ticket details, customer contact, channel, severity, and description. Flag high-severity tickets clearly.\n\n---\n\n## OUTPUT FORMAT\n\nAlways return a completion summary to the Orchestrator.\n\nFor leads:\n{\n  \"status\": \"success\",\n  \"type\": \"booking_lead\",\n  \"ref_id\": \"HV-B-XXXX\",\n  \"customer_email\": \"string\",\n  \"emails_sent\": [\"customer\", \"team\"]\n}\n\nFor tickets:\n{\n  \"status\": \"success\",\n  \"type\": \"support_ticket\",\n  \"ref_id\": \"HV-T-XXXX\",\n  \"severity\": \"medium\",\n  \"customer_email\": \"string\",\n  \"emails_sent\": [\"customer\", \"team\"]\n}\n\n---\n\n## FEW-SHOT EXAMPLES\n\n### Example A — Booking Lead\n\nInput from Orchestrator:\n{\n  \"customer\": {\"name\": \"Hamza Sallam\", \"email\": \"hamza@gmail.com\", \"phone\": \"+90 555 000 0000\"},\n  \"booking\": {\"package\": \"Magical Maldives Escape\", \"gsheet_ref\": \"PKG-001\", \"dates\": \"Nov 20–27\", \"adults\": 2, \"children\": [], \"special_requests\": \"anniversary setup\"},\n  \"quoted_price\": {\"amount\": 5600, \"currency\": \"USD\"},\n  \"channel\": \"website\"\n}\n\nActions:\n1. Write lead to MongoDB → ref HV-B-4231\n2. Email to hamza@gmail.com: confirm Maldives Escape inquiry, ref HV-B-4231, Nov 20–27, $5,600 quoted, team will contact within 24 hours\n3. Email to info@horizonvista.com: new lead details, PKG-001, 2 adults, anniversary\n\nOutput:\n{\n  \"status\": \"success\",\n  \"type\": \"booking_lead\",\n  \"ref_id\": \"HV-B-4231\",\n  \"customer_email\": \"hamza@gmail.com\",\n  \"emails_sent\": [\"customer\", \"team\"]\n}\n\n---\n\n### Example B — Complaint Ticket\n\nInput from Orchestrator:\n{\n  \"customer\": {\"name\": \"Unknown\", \"email\": \"sara@hotmail.com\"},\n  \"issue\": {\"description\": \"Egypt trip guide barely spoke English, ruined the experience\", \"related_package\": \"PKG-010\", \"severity\": \"medium\"},\n  \"channel\": \"instagram\"\n}\n\nActions:\n1. Write ticket to MongoDB → ref HV-T-0087, status open, severity medium\n2. Email to sara@hotmail.com: empathetic acknowledgement, ref HV-T-0087, 24-hour response, WhatsApp for urgent matters\n3. Email to info@horizonvista.com: ⚠ MEDIUM — HV-T-0087 — Egypt trip guide language complaint, Instagram, customer: sara@hotmail.com\n\nOutput:\n{\n  \"status\": \"success\",\n  \"type\": \"support_ticket\",\n  \"ref_id\": \"HV-T-0087\",\n  \"severity\": \"medium\",\n  \"customer_email\": \"sara@hotmail.com\",\n  \"emails_sent\": [\"customer\", \"team\"]\n}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        688
+      ],
+      "id": "87e120dc-67b2-4775-85e9-347fd4af164c",
+      "name": "booking_agent"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Retrieve airport transfer pricing from the HorizonVista pricing sheet. ",
+        "documentId": {
+          "__rl": true,
+          "value": "1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II",
+          "mode": "list",
+          "cachedResultName": "HorizonVista_Prices",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1601108966,
+          "mode": "list",
+          "cachedResultName": "Airport Transfers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II/edit#gid=1601108966"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        464,
+        1056
+      ],
+      "id": "7b628060-570d-446c-84b8-7fb1f79c1f17",
+      "name": "get_transfer_fees",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LwvPNbKBl5FWu0Cy",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Retrieve the HorizonVista service fee for standalone hotel reservations not bundled in a package.  Returns: fee type (flat or percentage), fee amount, and currency.\n",
+        "documentId": {
+          "__rl": true,
+          "value": "1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II",
+          "mode": "list",
+          "cachedResultName": "HorizonVista_Prices",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 98235002,
+          "mode": "list",
+          "cachedResultName": "Hotel Service Fees",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II/edit#gid=98235002"
+        },
+        "filtersUI": {
+          "values": []
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        592,
+        1056
+      ],
+      "id": "4ea193b9-0b0e-4127-973c-81a154199bd8",
+      "name": "get_hotel_fees",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LwvPNbKBl5FWu0Cy",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Fetch the live exchange rate between two currencies. Use whenever the user requests a price in a currency different from the package's base currency. Always fetch a live rate — never use a hardcoded value. Input: source currency code and target currency code (e.g. USD to TRY).",
+        "url": "=https://api.frankfurter.dev/v1/latest",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "from",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `ISO currency code`, 'string') }}"
+            },
+            {
+              "name": "to",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `ISO currency code`, 'string') }}"
+            }
+          ]
+        },
+        "options": {},
+        "optimizeResponse": true,
+        "fieldsToInclude": "selected",
+        "fields": "rates"
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        720,
+        1056
+      ],
+      "id": "e6a97901-9543-49bf-b781-3bba0e87c034",
+      "name": "get_currency_rate"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Retrieve live pricing data for a specific tour package from the HorizonVista pricing sheet. Look up by ref_id (e.g. PKG-001). Returns: per_person_double price, single_supplement, base currency, child discount percentage, group discount threshold and percentage.",
+        "documentId": {
+          "__rl": true,
+          "value": "1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II",
+          "mode": "list",
+          "cachedResultName": "HorizonVista_Prices",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2035693909,
+          "mode": "list",
+          "cachedResultName": "Packages",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II/edit#gid=2035693909"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "ref_id",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        848,
+        1056
+      ],
+      "id": "23304cbb-bbed-4674-9014-4dd04f6a8962",
+      "name": "get_packages_prices",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LwvPNbKBl5FWu0Cy",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Write a new booking lead document to the MongoDB leads collection in tourism_db. Use when a customer has confirmed interest in booking a package or service and all required fields are available: ref_id (HV-B-XXXX), customer name, email, phone, package details, travel dates, passenger count, quoted price, and channel. Set status to \"new\" and include a timestamp.",
+        "operation": "insert",
+        "collection": "leads",
+        "fields": "={{ $fromAI(\"document\", \"The full lead document as a JSON object including ref_id, type, status, customer, booking, quoted_price, channel, and created_at\") }}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        1008,
+        896
+      ],
+      "id": "7475dcdb-7b6f-4aee-9e97-fd53f5850407",
+      "name": "create_lead",
+      "credentials": {
+        "mongoDb": {
+          "id": "xpFFw7h0b6A7ihiL",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Write a new support ticket document to the MongoDB tickets collection in tourism_db. Use when a customer has reported a complaint, issue, or escalation. Required fields: ref_id (HV-T-XXXX), customer email, issue description, severity (low/medium/high), related package if known, channel, and timestamp. Set status to \"open\".",
+        "operation": "insert",
+        "collection": "tickets",
+        "fields": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Fields', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDbTool",
+      "typeVersion": 1.2,
+      "position": [
+        1296,
+        896
+      ],
+      "id": "46091d26-db77-4068-8e3a-720a57f0a153",
+      "name": "create_ticket",
+      "credentials": {
+        "mongoDb": {
+          "id": "xpFFw7h0b6A7ihiL",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Send an email to two emails per task: one to the customer (confirmation of their booking inquiry or support ticket) and one to the HorizonVista internal team at info@horizonvista.com. Always send both emails before returning the result. Write email content in a professional tone; the customer-facing email should match the customer's language if known.",
+        "fromEmail": "=horizonvista@hamzasallam.online",
+        "toEmail": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To_Email', `send to both service and user.\n*ask for user's email`, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "emailFormat": "text",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', `plain text`, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.emailSendTool",
+      "typeVersion": 2.1,
+      "position": [
+        1424,
+        896
+      ],
+      "id": "f6fbbfcd-5627-4a8d-8714-ae0b43986c7d",
+      "name": "send_email",
+      "webhookId": "2eefd382-90f1-4b39-afbd-a27d5b060703",
+      "credentials": {
+        "smtp": {
+          "id": "LMiisvFj5bHuBsj8",
+          "name": "Email account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.sessionId }}",
+        "collectionName": "chat_sessions",
+        "databaseName": "tourism_db",
+        "contextWindowLength": 7
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        848
+      ],
+      "id": "784cf141-b91e-4c74-8535-7e7ceb74e513",
+      "name": "memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "xpFFw7h0b6A7ihiL",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        608,
+        256
+      ],
+      "id": "14ea5e82-d784-4ac0-9d37-d71f0f9ee52e",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "evHQHooARV0gZmCU",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1152,
+        896
+      ],
+      "id": "e82ed7ee-769f-43ac-8e55-038e90c37467",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "lregwzBXG4cUXUuZ",
+          "name": "hamzasallam13"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "collection": "chat_sessions",
+        "options": {},
+        "query": "={{ JSON.stringify({ sessionId: $('Webhook').first().json.body.sessionId }) }}"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        -112
+      ],
+      "id": "0f3cab61-8674-458b-a795-a6a05c77e163",
+      "name": "Find documents",
+      "credentials": {
+        "mongoDb": {
+          "id": "xpFFw7h0b6A7ihiL",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2272,
+        64
+      ],
+      "id": "059301fe-81b0-4e86-aabd-76b141ce90df",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "lregwzBXG4cUXUuZ",
+          "name": "hamzasallam13"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const summary = $input.first().json.text; // LLM Chain output\nconst recentMessages = $('Split messages').first().json.recentMessages;\nconst sessionId = $('Split messages').first().json.sessionId;\n\n// store summary as an AI message so n8n's memory loader recognizes it\nconst summaryRecord = {\n  type: 'ai',\n  data: {\n    content: `📋 [Conversation Summary — context from earlier in this session]:\\n${summary}`,\n    tool_calls: [],\n    invalid_tool_calls: [],\n    additional_kwargs: {},\n    response_metadata: {}\n  }\n};\n\nconst newMessages = [summaryRecord, ...recentMessages];\n\nreturn [{\n  json: {\n    sessionId,\n    messages: newMessages\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2624,
+        -128
+      ],
+      "id": "219e7420-5837-4498-8d41-7cffa1783346",
+      "name": "Rebuild messages array"
+    },
+    {
+      "parameters": {
+        "jsCode": "const messages = $input.first().json.messages || [];\n\n// keep last 6 messages (roughly 2 recent interactions including any tool messages)\nconst recentMessages = messages.slice(-6);\nconst oldMessages = messages.slice(0, -6);\n\n// build clean text for summarization — skip tool messages and raw tool call lines\nconst summaryInput = oldMessages\n  .filter(m => m.type === 'human' || m.type === 'ai')\n  .filter(m => !m.data.content.startsWith('Calling '))\n  .map(m => {\n    const role = m.type === 'human' ? 'Customer' : 'Vista';\n    return `${role}: ${m.data.content}`;\n  })\n  .join('\\n\\n');\n\nreturn [{\n  json: {\n    summaryInput,\n    recentMessages,\n    sessionId: $input.first().json.sessionId\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2064,
+        -128
+      ],
+      "id": "4f9c8242-8c65-42c3-8273-1f6ac556f705",
+      "name": "Split messages"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a memory assistant for Vista, HorizonVista Travel's AI consultant.\n\nSummarize the following conversation concisely. Capture:\n- Customer identity: name, nationality, city, language used\n- What they asked about and key information exchanged\n- Any specific numbers: prices quoted, budgets mentioned, dates, passenger counts\n- Packages or services discussed\n- Bookings initiated or complaints raised\n- Any unresolved questions or pending actions\n\nWrite in English. Be specific — preserve names, numbers, and facts exactly.\nKeep it under 150 words.\n\njust return the summary , nothing else from you\n\nConversation:\n{{ $json.summaryInput }}",
+        "messages": {
+          "messageValues": []
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        2272,
+        -128
+      ],
+      "id": "76c7b5a8-8d82-40b3-a3bd-31c8b32c2f2c",
+      "name": "Memory Summarizer"
+    },
+    {
+      "parameters": {
+        "jsCode": "const messages = $input.first().json.messages || [];\n\n// count only human + ai pairs (ignore tool messages)\nconst turns = messages.filter(m => m.type === 'human' || m.type === 'ai');\nconst interactionCount = Math.floor(turns.length / 2);\n\nreturn [{\n  json: {\n    shouldSummarize: interactionCount >= 5,\n    interactionCount,\n    sessionId: $input.first().json.sessionId,\n    messages\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        -112
+      ],
+      "id": "97054661-94b0-4f92-8038-4f955f463dca",
+      "name": "Count and decide"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "ceb4b979-81df-4875-8b56-51ccf21dd9db",
+              "leftValue": "={{ $json.shouldSummarize }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1776,
+        -112
+      ],
+      "id": "b5c021f4-eb62-45e9-8f81-d072dd96c4aa",
+      "name": "Are there more than 5 interactions so far?"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "chat_sessions",
+        "updateKey": "sessionId",
+        "fields": "messages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        2832,
+        -128
+      ],
+      "id": "e5f5e7d8-705c-4d23-9266-54fdb0daafda",
+      "name": "Update Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "xpFFw7h0b6A7ihiL",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Summarize memory every 5 messages\n",
+        "height": 560,
+        "width": 1744
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1280,
+        -288
+      ],
+      "typeVersion": 1,
+      "id": "b5f9e122-e649-49db-89b4-4a27a5ad99ec",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        976,
+        -560
+      ],
+      "id": "884e8389-2729-4f9d-bea0-190582dcac47",
+      "name": "Google Gemini Chat Model3",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "K7ZwXfKg7rY6R8ug",
+          "name": "smartgaters"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1184,
+        -544
+      ],
+      "id": "bf812113-8205-4751-b6c4-1fc8e3a08bd9",
+      "name": "Google Gemini Chat Model4",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "lregwzBXG4cUXUuZ",
+          "name": "hamzasallam13"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.output || $input.first().json.text || '';\n\n// strip markdown code fences if the model wraps it\nconst cleaned = raw.replace(/```json|```/g, '').trim();\n\nlet scores;\ntry {\n  scores = JSON.parse(cleaned);\n} catch(e) {\n  scores = {\n    relevance: null,\n    correctness: null,\n    tone: null,\n    completeness: null,\n    overall: null,\n    reasoning: \"Parse error: \" + raw.slice(0, 100),\n    flagged: true\n  };\n}\n\nreturn [{\n  json: {\n    sessionId: $('Orchestrator').first().json.sessionId,\n    channel: $('Orchestrator').first().json.channel,\n    user_message: $('Orchestrator').first().json.userMessage,\n    agent_response: $('Orchestrator').first().json.output,\n    scores,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1424,
+        -736
+      ],
+      "id": "5a4c58da-cc69-4681-bd93-b2a882e3df8e",
+      "name": "parse the json",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a quality evaluator for Vista, an AI travel consultant for HorizonVista Travel.\n\nYou will receive a customer message and Vista's response. Score the response on 4 criteria from 1 to 5.\n\nCRITERIA:\n1. Relevance    — Does the response directly address what the customer asked?\n2. Correctness  — Is the information accurate and consistent with a professional travel consultant?\n3. Tone         — Is it warm, professional, and appropriate for a travel brand?\n4. Completeness — Did Vista cover all aspects without leaving important things unanswered?\n\nSCORING:\n5 = Excellent\n4 = Good, minor issues\n3 = Acceptable, noticeable gaps\n2 = Poor, significant problems\n1 = Wrong or inappropriate\n\nCustomer message: {{ $('Webhook').first().json.body.message }}\nVista's response: {{$json.output}}\n\nReturn ONLY a valid JSON object, no explanation outside it:\n{\n  \"relevance\": <1-5>,\n  \"correctness\": <1-5>,\n  \"tone\": <1-5>,\n  \"completeness\": <1-5>,\n  \"overall\": <average of the 4 scores>,\n  \"reasoning\": \"<one sentence summary of the evaluation>\",\n  \"flagged\": <true if any score is 2 or below, false otherwise>\n}",
+        "needsFallback": true,
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1072,
+        -736
+      ],
+      "id": "e970129f-7e54-49c7-83e4-733965bdc15d",
+      "name": "Evaluate agent response",
+      "retryOnFail": true,
+      "onError": "continueRegularOutput",
+      "notes": "(LLM-as-a-judge)"
+    },
+    {
+      "parameters": {
+        "content": "## Evaluation\n**LLM-as-a-judge**",
+        "height": 560,
+        "width": 992,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        928,
+        -896
+      ],
+      "typeVersion": 1,
+      "id": "a641791f-dc3d-445f-b1f2-88f31b277b57",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Agent's tools\n",
+        "height": 800,
+        "width": 2096,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -368,
+        496
+      ],
+      "typeVersion": 1,
+      "id": "abe7f15d-f183-412b-a73d-1826030bc2d8",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        240,
+        96
+      ],
+      "id": "3a4345f9-7b58-4999-8724-8d1c397a4006",
+      "name": "Google Gemini Chat Model5",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "K7ZwXfKg7rY6R8ug",
+          "name": "smartgaters"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II",
+          "mode": "list",
+          "cachedResultName": "HorizonVista_Prices",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1262670665,
+          "mode": "list",
+          "cachedResultName": "Evaluation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I9Gbf6rs1zBXuWNewzUFES2PQ2AYIzhnjxF05oiQ2II/edit#gid=1262670665"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ $json.timestamp }}",
+            "agent_response": "={{ $json.agent_response }}",
+            "relevance": "={{ $json.scores.relevance }}",
+            "correctness": "={{ $json.scores.correctness }}",
+            "tone": "={{ $json.scores.tone }}",
+            "completeness": "={{ $json.scores.completeness }}",
+            "overall": "={{ $json.scores.overall }}",
+            "reasoning": "={{ $json.scores.reasoning }}",
+            "flagged": "={{ $json.scores.flagged }}",
+            "user_message": "={{ $('Webhook').first().json.body.message }}",
+            "sessionId": "={{ $('Webhook').item.json.body.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "channel",
+              "displayName": "channel",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "user_message",
+              "displayName": "user_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "agent_response",
+              "displayName": "agent_response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "relevance",
+              "displayName": "relevance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correctness",
+              "displayName": "correctness",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tone",
+              "displayName": "tone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "completeness",
+              "displayName": "completeness",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "overall",
+              "displayName": "overall",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reasoning",
+              "displayName": "reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "flagged",
+              "displayName": "flagged",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1632,
+        -736
+      ],
+      "id": "4a8be915-8e01-42fa-a76d-84a050c296e0",
+      "name": "log Metrics",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LwvPNbKBl5FWu0Cy",
+          "name": "Google Sheets account 2"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.hamzasallam.online",
+            "user-agent": "Deno/2.1.4 (variant; SupabaseEdgeRuntime/1.73.15)",
+            "content-length": "100",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "*",
+            "authorization": {
+              "__redacted": true,
+              "reason": "node_defined_field",
+              "canReveal": false
+            },
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "2a05:d014:61b:2709:4426:2bd0:c0c3:c1dd",
+            "cf-ipcountry": "DE",
+            "cf-ray": "9f4989988cb45d44-FRA",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-warp-tag-id": "240273b0-0488-4335-b7e9-dbc9b04473cb",
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "traceparent": "00-019de03b3ae27cc290c433ec9c7a6e04-00de73d30236c69b-01",
+            "x-forwarded-for": "2a05:d014:61b:2709:4426:2bd0:c0c3:c1dd",
+            "x-forwarded-proto": "https"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "message": "Can I depart from a different city?",
+            "sessionId": "b4c653e8-72db-432e-9960-ec4fa2f4b36d"
+          },
+          "webhookUrl": "https://n8n.hamzasallam.online/webhook/horizonvista/api/send-message",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "booking_agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "price_agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "price_agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference": {
+      "ai_embedding": [
+        [
+          {
+            "node": "search_knowledge",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Orchestrator": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Evaluate agent response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search_web": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search_knowledge": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_weather": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "price_agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "booking_agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_transfer_fees": {
+      "ai_tool": [
+        [
+          {
+            "node": "price_agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_hotel_fees": {
+      "ai_tool": [
+        [
+          {
+            "node": "price_agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_currency_rate": {
+      "ai_tool": [
+        [
+          {
+            "node": "price_agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_packages_prices": {
+      "ai_tool": [
+        [
+          {
+            "node": "price_agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_lead": {
+      "ai_tool": [
+        [
+          {
+            "node": "booking_agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_ticket": {
+      "ai_tool": [
+        [
+          {
+            "node": "booking_agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send_email": {
+      "ai_tool": [
+        [
+          {
+            "node": "booking_agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_languageModel",
+            "index": 1
+          },
+          {
+            "node": "price_agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "booking_agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Find documents": {
+      "main": [
+        [
+          {
+            "node": "Count and decide",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Memory Summarizer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rebuild messages array": {
+      "main": [
+        [
+          {
+            "node": "Update Memory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split messages": {
+      "main": [
+        [
+          {
+            "node": "Memory Summarizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory Summarizer": {
+      "main": [
+        [
+          {
+            "node": "Rebuild messages array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Count and decide": {
+      "main": [
+        [
+          {
+            "node": "Are there more than 5 interactions so far?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Are there more than 5 interactions so far?": {
+      "main": [
+        [
+          {
+            "node": "Split messages",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Find documents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Evaluate agent response",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Evaluate agent response",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "parse the json": {
+      "main": [
+        [
+          {
+            "node": "log Metrics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluate agent response": {
+      "main": [
+        [
+          {
+            "node": "parse the json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "b9yA2mRwKtaCOLcRENvVw",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "e98a94ca-2b1d-44f2-a67c-55561af9adc7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0ef319171642ff61a805002a8d3c9810efc150688b66d838b10c1eccf1fabe2e"
+  },
+  "id": "WcWwgvBRKxhmisVk",
+  "tags": []
+}

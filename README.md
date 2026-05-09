@@ -94,32 +94,30 @@ Open **http://localhost:8080** in your browser.
 
 ```
 horizonVista/
+├── ai/                       # AI Agent configuration
+│   ├── knowledge_base/       # JSON knowledge base files for the AI
+│   ├── n8n_workflows/        # n8n exported workflows
+│   └── prompts/              # System prompts for AI agents
+├── docs/                     # Project documentation
+│   ├── HorizonVista_Presentation.html # HTML presentation
+│   ├── HorizonVist_Report.pdf         # Final report
+│   ├── Report.md                      # Markdown report source
+│   ├── pictures/                      # Presentation assets
+│   └── ...                            # Flowcharts, spreadsheets, evaluations
+├── scripts/                  # Utility scripts (e.g., build scripts)
 ├── server/
 │   └── index.js              # Express API server (chat proxy + static serving)
 ├── src/
-│   ├── components/
-│   │   ├── ui/               # shadcn/ui primitives
-│   │   ├── ChatAssistant.tsx  # AI chat widget
-│   │   ├── Hero.tsx           # Landing hero section
-│   │   ├── Packages.tsx       # Travel package cards
-│   │   ├── Services.tsx       # Premium services grid
-│   │   ├── Analytics.tsx      # Smart insights section
-│   │   ├── BookingForm.tsx    # Custom booking form
-│   │   ├── Contact.tsx        # Contact section
-│   │   ├── Navbar.tsx         # Navigation bar
-│   │   └── Footer.tsx         # Footer
-│   ├── pages/
-│   │   ├── Index.tsx          # Home page (single-page app)
-│   │   └── NotFound.tsx       # 404 page
-│   ├── lib/                   # Utilities and constants
-│   ├── hooks/                 # Custom React hooks
-│   ├── App.tsx                # App root with routing
-│   └── main.tsx               # Entry point
-├── public/                    # Static assets
-├── .env.example               # Environment variable template
-├── Dockerfile                 # Multi-stage production build
-├── vite.config.ts             # Vite configuration with API proxy
-├── tailwind.config.ts         # Tailwind CSS theme
+│   ├── components/           # React components (ui, layouts, pages)
+│   ├── pages/                # App routes
+│   ├── lib/                  # Utilities and constants
+│   ├── hooks/                # Custom React hooks
+│   ├── App.tsx               # App root with routing
+│   └── main.tsx              # Entry point
+├── public/                   # Static assets
+├── .env.example              # Environment variable template
+├── Dockerfile                # Multi-stage production build
+├── vite.config.ts            # Vite configuration with API proxy
 └── package.json
 ```
 

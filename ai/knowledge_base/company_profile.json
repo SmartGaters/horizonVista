@@ -1,0 +1,54 @@
+{
+  "name": "HorizonVista Travel",
+  "tagline": "Your Journey, Our Passion",
+  "founded": 2025,
+  "headquarters": "Istanbul, Turkey",
+  "branches": [
+    {
+      "city": "Istanbul",
+      "address": "Bağcılar Cad. No:14, Şişli",
+      "phone": "+90 541 420 59",
+      "email": "istanbul@horizonvista.com",
+      "hours": "Mon–Sat 09:00–18:00"
+    },
+    {
+      "city": "Ankara",
+      "address": "Kızılay Mah. Atatürk Blv. No:72",
+      "phone": "+90 552 578 6880",
+      "email": "ankara@horizonvista.com",
+      "hours": "Mon–Sat 09:00–17:30"
+    },
+    {
+      "city": "Dubai (Partner)",
+      "address": "Business Bay, Tower B, Office 412",
+      "phone": "+971 4 555 0303",
+      "email": "dubai@horizonvista.com",
+      "hours": "Sun–Thu 09:00–18:00"
+    }
+  ],
+  "general_email": "info@horizonvista.com",
+  "general_phone": "+90 212 555 0100",
+  "website": "www.horizonvista.com",
+  "social_media": {
+    "instagram": "@horizonvista",
+    "facebook": "HorizonVistaTravel",
+    "whatsapp": "+90 555 123 4567"
+  },
+  "languages_supported": [
+    "Turkish",
+    "English",
+    "Arabic"
+  ],
+  "payment_methods": [
+    "Credit Card (Visa/Mastercard)",
+    "Bank Transfer",
+    "PayPal",
+    "Installment Plans (up to 12 months interest-free)"
+  ],
+  "currencies_accepted": [
+    "TRY",
+    "USD",
+    "EUR",
+    "AED"
+  ]
+}

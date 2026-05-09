@@ -1,0 +1,212 @@
+[
+  {
+    "category": "Booking",
+    "question": "How do I book a package?",
+    "answer": "You can book through our website at www.horizonvista.com, visit any of our branch offices, call our hotline at +90 212 555 0100, or message us on WhatsApp at +90 555 123 4567. A 30% deposit is required to confirm your booking."
+  },
+  {
+    "category": "Booking",
+    "question": "Can I book on behalf of someone else?",
+    "answer": "Yes. You can book on behalf of a family member or friend. Their full legal name (as on passport), passport number, and date of birth will be required at the time of booking."
+  },
+  {
+    "category": "Booking",
+    "question": "How do I know my booking is confirmed?",
+    "answer": "You will receive a confirmation email within 24 hours of your deposit payment. This email contains your booking reference number, itinerary details, and vouchers."
+  },
+  {
+    "category": "Booking",
+    "question": "Can I book a customized private tour?",
+    "answer": "Absolutely! We offer fully customized private tours for individuals, couples, families, and corporate groups. Contact us at info@horizonvista.com or call us to discuss your requirements and we will build a tailor-made itinerary and quote."
+  },
+  {
+    "category": "Booking",
+    "question": "Is there a minimum group size for group discounts?",
+    "answer": "Group discounts generally start at 6 passengers, though this varies by package. Some packages require 8 or 10 passengers. For every 20 paying passengers, one place is offered free."
+  },
+  {
+    "category": "Payment",
+    "question": "What payment methods do you accept?",
+    "answer": "We accept Visa and Mastercard credit/debit cards, bank transfers, PayPal, and offer installment plans of up to 12 months interest-free for qualifying packages. Currencies accepted include TRY, USD, EUR, and AED."
+  },
+  {
+    "category": "Payment",
+    "question": "Is the deposit refundable?",
+    "answer": "No, the 30% deposit is non-refundable. It is, however, partially protected if you hold travel insurance. We recommend purchasing insurance at the time of booking."
+  },
+  {
+    "category": "Payment",
+    "question": "When is the full payment due?",
+    "answer": "Full payment is due 30 days before your departure date. For bookings made within 14 days of departure, full payment is required immediately."
+  },
+  {
+    "category": "Payment",
+    "question": "Do you offer installment payment plans?",
+    "answer": "Yes, we offer interest-free installment plans of up to 12 months on qualifying packages. This can be arranged at booking. Please ask your agent for details."
+  },
+  {
+    "category": "Payment",
+    "question": "Are prices per person or per package?",
+    "answer": "All prices listed on our website and brochures are per person based on double occupancy (two people sharing a room). A single supplement fee applies if you are traveling alone and require a single room."
+  },
+  {
+    "category": "Cancellation & Refunds",
+    "question": "What is your cancellation policy?",
+    "answer": "Cancellations 60+ days before departure forfeit only the 30% deposit. 31–59 days: 50% of total cost. 15–30 days: 75%. Within 14 days or no-show: 100% (no refund). All cancellations must be submitted in writing to cancellations@horizonvista.com."
+  },
+  {
+    "category": "Cancellation & Refunds",
+    "question": "Can I get a refund if the trip is cancelled by HorizonVista?",
+    "answer": "Yes. If HorizonVista cancels a trip due to operational reasons, you receive a full refund within 14 business days. In force majeure situations (natural disasters, pandemics), an 18-month travel credit is offered instead."
+  },
+  {
+    "category": "Cancellation & Refunds",
+    "question": "How long does a refund take?",
+    "answer": "Eligible refunds are processed within 14 business days and returned to your original payment method."
+  },
+  {
+    "category": "Cancellation & Refunds",
+    "question": "What if a specific activity in my package is cancelled?",
+    "answer": "If a specific excursion or service cannot be delivered, a partial refund for that component is issued within 7 business days. An alternative activity of similar value will be offered where possible."
+  },
+  {
+    "category": "Travel Documents",
+    "question": "Do I need a visa?",
+    "answer": "Visa requirements depend on your nationality and destination. HorizonVista provides visa guidance documents and invitation letters free of charge. However, obtaining the visa is the client's responsibility. Your passport must be valid for at least 6 months beyond your return date."
+  },
+  {
+    "category": "Travel Documents",
+    "question": "What travel documents do I need to bring?",
+    "answer": "You will need: (1) Valid passport (6+ months validity), (2) Visa if required, (3) Booking confirmation email/vouchers, (4) Travel insurance certificate, (5) Any vaccination certificates if required by the destination."
+  },
+  {
+    "category": "Travel Documents",
+    "question": "My passport expires in 4 months. Can I still travel?",
+    "answer": "Unfortunately, most countries require your passport to be valid for at least 6 months beyond your return date. We strongly advise renewing your passport before booking international travel."
+  },
+  {
+    "category": "Flights",
+    "question": "Are flights included in all packages?",
+    "answer": "Yes, return flights from Istanbul are included in all international packages. Domestic flights within destinations (e.g., internal flights in Japan or India) are also included where specified in the package details."
+  },
+  {
+    "category": "Flights",
+    "question": "Can I depart from a different city?",
+    "answer": "Yes, departure from Ankara, Izmir, or other Turkish cities is possible with an adjusted price. International departure from other countries can also be arranged — contact us for a custom quote."
+  },
+  {
+    "category": "Flights",
+    "question": "Can I request a specific airline or seat upgrade?",
+    "answer": "We work with multiple airlines and can note your preferences. Seat upgrades to business or first class are available for an additional cost — please request this at booking."
+  },
+  {
+    "category": "Hotels",
+    "question": "What hotel standard is included?",
+    "answer": "Most packages include 4-star hotels. Premium and luxury packages include 5-star properties. The specific hotel or resort is listed in each package. Hotel substitutions of equal or higher standard may occasionally occur due to availability."
+  },
+  {
+    "category": "Hotels",
+    "question": "Can I upgrade my hotel?",
+    "answer": "Yes, hotel upgrades are available on most packages for an additional fee. Contact your agent to explore upgrade options before final payment."
+  },
+  {
+    "category": "Hotels",
+    "question": "What time is check-in and check-out?",
+    "answer": "Standard check-in is 2:00 PM and check-out is 12:00 PM. Early check-in or late check-out can sometimes be arranged but is not guaranteed and may carry an extra charge."
+  },
+  {
+    "category": "Children & Families",
+    "question": "Are children allowed on all tours?",
+    "answer": "Children are welcome on most tours. Age restrictions apply to certain adventure activities (e.g., minimum age 6 for hot air balloon, minimum age 8 for glacier walks). Please check each package's child policy. Unaccompanied minors under 16 are not accepted."
+  },
+  {
+    "category": "Children & Families",
+    "question": "Do infants need their own seat on the flight?",
+    "answer": "Children under 2 travel free on a parent's lap (no separate seat allocated). If you prefer a separate seat for your infant, this can be arranged at cost."
+  },
+  {
+    "category": "Children & Families",
+    "question": "Are family rooms available?",
+    "answer": "Yes, family rooms or connecting rooms are available for most packages. Please request this at the time of booking to ensure availability."
+  },
+  {
+    "category": "Health & Safety",
+    "question": "Do you require vaccinations?",
+    "answer": "Vaccination requirements vary by destination. For some destinations (e.g., Tanzania, parts of South America), yellow fever or other vaccinations may be required or strongly recommended. We provide a destination health advisory with every booking. Always consult your doctor before travel."
+  },
+  {
+    "category": "Health & Safety",
+    "question": "Is travel insurance mandatory?",
+    "answer": "Travel insurance is mandatory for Maldives, Tanzania, and Iceland packages, and strongly recommended for all other bookings. Our partner AXA Travel Insurance can be added at booking for approximately $80–$150 USD per person."
+  },
+  {
+    "category": "Health & Safety",
+    "question": "What if I have a medical condition?",
+    "answer": "Please inform your booking agent of any medical conditions at the time of booking. For adventure activities, medical fitness may be required. Clients with mobility limitations should inform us at least 30 days before departure so we can arrange appropriate accommodations."
+  },
+  {
+    "category": "Food & Diet",
+    "question": "Can you accommodate dietary requirements?",
+    "answer": "Yes. We cater for vegetarian, vegan, halal, gluten-free, and other dietary needs. Please inform your agent at the time of booking. Note that in some remote destinations, menu options may be limited despite best efforts."
+  },
+  {
+    "category": "Food & Diet",
+    "question": "Are all meals included?",
+    "answer": "Meal inclusions vary by package. Most packages include daily breakfast. Some include dinners or specific meals as noted in the itinerary. Check the 'Includes' section of each package for details."
+  },
+  {
+    "category": "Languages",
+    "question": "In which languages is service available?",
+    "answer": "HorizonVista operates in Turkish, English, and Arabic. Our website, brochures, and customer support are available in all three languages. Most guided tours operate in English; Turkish and Arabic-language guides can be arranged on request for select destinations."
+  },
+  {
+    "category": "Destinations",
+    "question": "Which destinations do you offer?",
+    "answer": "We offer packages across Asia (Maldives, Bali, Japan, Thailand, Vietnam, Malaysia/Singapore, India), Europe (Greece, Switzerland/France, Iceland, Prague/Vienna), Middle East (Dubai, Umrah), Africa (Morocco, Tanzania/Zanzibar, Egypt), South America (Peru/Argentina, Costa Rica), and Domestic Turkey. New destinations are added regularly."
+  },
+  {
+    "category": "Destinations",
+    "question": "Do you offer domestic Turkey tours?",
+    "answer": "Yes! We offer popular domestic packages such as our Cappadocia & Pamukkale Express (PKG-011), as well as custom tours to the Aegean, Mediterranean, and Eastern Turkey regions. These are great value options especially for a weekend getaway."
+  },
+  {
+    "category": "Sustainability",
+    "question": "Is HorizonVista committed to sustainable tourism?",
+    "answer": "Yes. We prioritize eco-friendly operators, promote responsible wildlife tourism (e.g., ethical elephant sanctuaries, no canned hunting safaris), and partner with carbon offset programs on our long-haul packages. Our Costa Rica package exclusively uses certified eco-lodges."
+  },
+  {
+    "category": "Corporate & Groups",
+    "question": "Do you organize corporate travel?",
+    "answer": "Yes. We offer corporate travel packages, incentive trips, team-building retreats, and MICE (Meetings, Incentives, Conferences & Events) services. Contact our corporate desk at corporate@horizonvista.com for a tailored proposal."
+  },
+  {
+    "category": "Complaints & Support",
+    "question": "What do I do if something goes wrong during my trip?",
+    "answer": "Contact your on-ground guide or hotel representative first. For urgent issues, call our 24/7 traveler support line at +90 212 555 0199. For non-urgent complaints, email support@horizonvista.com within 30 days of return. We take all complaints seriously and aim to resolve within 10 business days."
+  },
+  {
+    "category": "Complaints & Support",
+    "question": "How do I leave a review or feedback?",
+    "answer": "We'd love to hear from you! After your trip, you'll receive a feedback survey via email. You can also leave a review on Google, TripAdvisor, or our Facebook page. Positive feedback is shared with guides and hotel partners; constructive feedback helps us improve."
+  },
+  {
+    "category": "Loyalty & Promotions",
+    "question": "Do you have a loyalty program?",
+    "answer": "Yes! Our HorizonVista Rewards program gives you points for every booking. Points can be redeemed for discounts on future trips. Sign up free at www.horizonvista.com/rewards. After 3 bookings, you become a Gold Member with priority service and exclusive deals."
+  },
+  {
+    "category": "Loyalty & Promotions",
+    "question": "Are there any current promotions or discounts?",
+    "answer": "We run seasonal promotions regularly. Current offers are posted on our website and social media (@horizonvista on Instagram). Early-bird discounts of up to 15% are available on packages booked 90+ days in advance. Sign up to our newsletter for exclusive deals."
+  },
+  {
+    "category": "Umrah & Religious Travel",
+    "question": "Do you offer Hajj packages?",
+    "answer": "We currently offer Umrah packages year-round (PKG-018). Hajj packages are subject to Saudi quota allocation and are offered seasonally. Contact us at info@horizonvista.com to join our Hajj waiting list."
+  },
+  {
+    "category": "Umrah & Religious Travel",
+    "question": "Is a religious guide included in the Umrah package?",
+    "answer": "Yes, our Umrah Economy package (PKG-018) includes a licensed religious guide (male scholar) who accompanies the group throughout, assists with rituals, and leads Ziyarat visits. Female guides/chaperones can be arranged for women-only groups on request."
+  }
+]
